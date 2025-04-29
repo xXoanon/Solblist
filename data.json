@@ -169,8 +169,8 @@
         "victors": [
             {
                 "name": "Excess",
-                "completionUrl": "",
-                "completionDate": ""
+                "completionUrl": "https://www.youtube.com/watch?v=syIjnY1qZd8",
+                "completionDate": "2023-05-20"
             }
         ],
         "videoUrl": "https://www.youtube.com/watch?v=29NTgRXWuMc"
@@ -189,6 +189,23 @@
     },
     {
         "rank": 15,
+        "name": "CROWD CONTROL",
+        "victors": [
+            {
+                "name": "Excess",
+                "completionUrl": "https://www.youtube.com/watch?v=uRE3xBOdyUU",
+                "completionDate": "2023-04-12"
+            },
+            {
+                "name": "Sky",
+                "completionUrl": "https://www.youtube.com/watch?v=gG76PsKi-vM",
+                "completionDate": "2023-11-25"
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=yQRMhKruCPw"
+    },
+        {
+        "rank": 16,
         "name": "AZURITE",
         "victors": [
             {
