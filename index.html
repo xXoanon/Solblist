@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Solblist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>THE SOLBLIST™</h1>
+        <div class="theme-selector-container">
+            <label for="theme-selector">Theme:</label>
+            <select id="theme-selector">
+                <!-- Options will be populated by common.js -->
+            </select>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link active">List</a>
+            <a href="profiles.html" class="nav-link">Profiles</a>
+            <a href="compare.html" class="nav-link">Compare</a>
+            <a href="stats.html" class="nav-link">Stats</a>
+            <a href="changelog.html" class="nav-link">Changelog</a>
+            <a href="about.html" class="nav-link">About</a>
+        </nav>
+        <hr class="header-line">
+    </header>
+
+    <main>
+        <!-- Challenge of the Month Button -->
+        <section class="challenge-link-section">
+            <a href="challenge.html" class="button challenge-button">🏆 View Challenge of the Month 🏆</a>
+        </section>
+
+        <!-- Main Level List View (Default Active) -->
+        <section id="list-view" class="tab-content active">
+            <h2 class="section-title">Main List</h2>
+            <hr class="header-line section-line">
+            <div id="solblist-container">
+                <!-- Level list items will be generated here by script.js -->
+                <p>Loading list...</p>
+            </div>
+        </section>
+
+        <!-- Profile/Ranking content moved to profiles.html -->
+        <!-- Single profile view is handled by profile.html -->
+        <!-- Single level view section removed -->
+
+    </main>
+
+    <!-- Level Detail Modal -->
+    <div id="level-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close-button">&times;</span>
+            <div class="modal-content-grid">
+                <div class="modal-video-column">
+                    <div id="modal-video-container" class="video-embed-container">
+                        <!-- YouTube iframe will be inserted here -->
+                    </div>
+                </div>
+                <div class="modal-details-column">
+                    <h2 id="modal-level-title">Level Title</h2>
+                    <p id="modal-level-points" class="modal-points-display"></p> <!-- Added class -->
+                    <h3 class="modal-victors-heading">Victors</h3>
+                    <div class="modal-victors-container"> <!-- Added container for scrolling -->
+                        <ul id="modal-victors-list">
+                            <!-- Victor list items will be inserted here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content will be populated by common.js -->
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="list.js"></script>
+</body>
+</html>

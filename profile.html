@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profile - The Solblist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>THE SOLBLIST™</h1>
+        <div class="theme-selector-container">
+            <label for="theme-selector">Theme:</label>
+            <select id="theme-selector">
+                <!-- Options will be populated by common.js -->
+            </select>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">List</a>
+            <a href="profiles.html" class="nav-link">Profiles</a>
+            <a href="compare.html" class="nav-link">Compare</a>
+            <a href="stats.html" class="nav-link">Stats</a>
+            <a href="changelog.html" class="nav-link">Changelog</a>
+            <a href="about.html" class="nav-link">About</a>
+        </nav>
+        <hr class="header-line">
+    </header>
+
+    <main>
+        <section id="single-profile-view">
+            <a href="profiles.html" id="back-to-profiles" class="button-secondary">← Back to Profiles</a>
+            <div id="single-profile-content" class="profile-card">
+                 <!-- Profile content will be structured here by profile.js -->
+                 <div id="profile-header"></div>
+                 <div id="profile-socials"></div>
+                 <div id="profile-hardest"></div>
+                 <div id="profile-completions"></div>
+                 <p>Loading profile...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer content will be populated by common.js -->
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

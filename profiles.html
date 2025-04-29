@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profiles & Rankings - The Solblist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>THE SOLBLIST™</h1>
+        <div class="theme-selector-container">
+            <label for="theme-selector">Theme:</label>
+            <select id="theme-selector">
+                <!-- Options will be populated by common.js -->
+            </select>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">List</a>
+            <a href="profiles.html" class="nav-link active">Profiles</a>
+            <a href="compare.html" class="nav-link">Compare</a>
+            <a href="stats.html" class="nav-link">Stats</a>
+            <a href="changelog.html" class="nav-link">Changelog</a>
+            <a href="about.html" class="nav-link">About</a>
+        </nav>
+        <hr class="header-line">
+    </header>
+
+    <main>
+        <!-- Container for side-by-side layout -->
+        <div class="rankings-layout-container">
+            <!-- Left Column: Rankings -->
+            <div class="rankings-column">
+                <h2 class="section-title">Player Rankings</h2>
+                <hr class="header-line section-line">
+                <div id="player-rankings-container">
+                    <!-- Rankings table/list will be generated here -->
+                    <p>Calculating rankings...</p>
+                </div>
+            </div>
+            <!-- Right Column: Additional Content (e.g., Stats) -->
+            <div class="stats-column">
+                 <h2 class="section-title">List Stats</h2>
+                 <hr class="header-line section-line">
+                 <div id="list-stats-container">
+                     <!-- Stats content will go here -->
+                     <p>Loading stats...</p>
+                 </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <!-- Footer content will be populated by common.js -->
+    </footer>
+
+    <!-- Include common script first, then page-specific script -->
+    <script src="common.js"></script> 
+    <script src="profiles.js"></script>
+</body>
+</html>

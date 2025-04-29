@@ -1,0 +1,158 @@
+/* challenge.css - Styles specific to the Challenge of the Month page */
+
+#challenge-page-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: var(--background-secondary);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+#current-challenge-container,
+#challenge-archive-container {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-family: var(--font-primary);
+}
+
+.challenge-item {
+    background-color: var(--background-tertiary);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius-sm);
+    border-left: 5px solid var(--accent-color);
+    border-right: 5px solid var(--accent-color); /* Added right border */
+}
+
+#current-challenge-container {
+    margin-bottom: 5px; /* Increased bottom margin */
+    padding: 25px; /* Added padding */
+    background-color: var(--card-bg-color); /* Use card background for emphasis */
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    text-align: center; /* Center align content */
+    border: 10px solid var(--border-color);
+}
+
+#current-challenge-container .section-title {
+    font-size: 1.8em; /* Larger title */
+    margin-bottom: 5px;
+}
+
+.challenge-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px; /* Increased margin */
+    color: var(--heading-color); /* Use heading color */
+    font-size: 1.4em; /* Larger level name */
+}
+
+.challenge-item p {
+    margin-bottom: 12px; /* Increased margin */
+    line-height: 1.7; /* Improved line height */
+    color: var(--text-color); /* Use primary text color */
+    font-size: 1.1em; /* Larger description text */
+}
+
+.challenge-item .video-embed-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-top: 15px;
+    border-radius: var(--border-radius-sm);
+}
+
+.challenge-item .video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.challenge-archive-item {
+    background-color: var(--background-tertiary);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--border-color);
+}
+
+.challenge-archive-item h4 {
+    margin: 0 0 5px 0;
+    color: var(--text-color);
+}
+
+.challenge-archive-item p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+/* Styles for Victors Section */
+.victors-section {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.victors-section h4 {
+    margin-bottom: 8px;
+    color: var(--accent-color);
+    font-size: 1.1em;
+}
+
+.victors-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 0;
+    color: var(--text-secondary);
+}
+
+.victors-section li {
+    margin-bottom: 4px;
+}
+
+/* Remove bullet points only for the current challenge victors list */
+.current-challenge .victors-section ul {
+    list-style-type: none;
+    margin-left: 0; /* Adjust margin if needed */
+    padding-left: 0; /* Adjust padding if needed */
+}
+
+.archive-victors {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: none; /* No top border for archive victors */
+    font-size: 0.9em;
+}
+
+.archive-victors strong {
+    color: var(--text-color);
+}
+
+.archive-victors ul {
+    margin-left: 15px;
+}
+
+.no-archive-victors {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+    #challenge-page-container {
+        padding: 15px;
+    }
+}
