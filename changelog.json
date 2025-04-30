@@ -7,5 +7,14 @@
       "New additions includes Player Profiles, Compare, Stats, Themes, and more.",
       "Removed Herobrine."
     ]
+  },
+  {
+    "version": "2.01",
+    "date": "2025-05-01",
+    "changes": [
+      "Added 'Completion Timeline' to the Player Profiles page.",
+      "Changed the fonts for the 'Hell', 'Pastel', and 'Rainbow' themes to make them more readable.",
+      "Added Herobrine."
+    ]
   }
 ]

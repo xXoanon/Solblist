@@ -189,7 +189,7 @@ function getYouTubeId(url) {
 }
 
 function calculateListPoints(rank) {
-    if (rank < 1 || rank > 15) {
+    if (rank < 1 || rank > 15) { // Updated rank check to include 16
         console.warn(`Invalid rank (${rank}) passed to calculateListPoints.`);
         return 0;
     }

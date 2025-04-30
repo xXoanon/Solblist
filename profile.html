@@ -38,7 +38,14 @@
                  <div id="profile-socials"></div>
                  <div id="profile-hardest"></div>
                  <div id="profile-completions"></div>
-                 <p>Loading profile...</p>
+                 <!-- Add container for the chart -->
+                 <div id="profile-timeline-chart-container" style="margin-top: 20px;">
+                     <h3 class="section-subtitle">Completion Timeline</h3>
+                     <div class="chart-wrapper"> <!-- Added wrapper -->
+                         <canvas id="completionTimelineChart"></canvas>
+                     </div>
+                 </div>
+                 <p id="loading-message">Loading profile...</p>
             </div>
         </section>
     </main>
@@ -47,6 +54,8 @@
         <!-- Footer content will be populated by common.js -->
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script> <!-- Add Date Adapter -->
     <script src="common.js"></script>
     <script src="profile.js"></script>
 </body>

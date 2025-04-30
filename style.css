@@ -3,10 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap'); /* Hell */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap'); /* Mechanical */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); /* Pastel Dream */
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); /* Rainbow */
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap'); /* Pastel Dream */
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'); /* Rainbow */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap'); /* Forest */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Retro */
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap"'); /* Rainbow New */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap'); /* Hell New */
 
 :root {
     /* Base Variables (can be overridden by themes) */
@@ -75,7 +77,7 @@
 
 /* 3. Hell Theme (Red/Black) */
 [data-theme="hell"] {
-    --font-primary: 'Metal Mania', cursive;
+    --font-primary: 'Special Elite', cursive;
     --font-mono: 'Roboto Mono', monospace;
     --bg-color: #330000;
     /* Corrected Zig-Zag Pattern */
@@ -130,7 +132,7 @@
 
 /* 5. Pastel Dream Theme (Soft Purple/Blue) */
 [data-theme="pastel-dream"] {
-    --font-primary: 'Pacifico', cursive;
+    --font-primary: 'Sour Gummy', cursive;
     --font-mono: 'Inter', sans-serif;
     --bg-color: #e1d5e7; /* Pale Lavender */
     /* Varied Size Polka Dot Pattern */
@@ -159,7 +161,7 @@
 
 /* 6. Rainbow Theme */
 [data-theme="rainbow"] {
-    --font-primary: 'Lobster', cursive;
+    --font-primary: 'Sigmar One', cursive;
     --font-mono: 'Inter', sans-serif;
     --bg-color: #ababab; /* Slightly darker base */
     /* Diagonal Rainbow Stripes - Desaturated with added colors */
@@ -818,6 +820,20 @@ footer a:focus {
     padding: 30px;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
+    /* max-height and overflow-y removed from here */
+}
+
+/* Completions list styling (no scrollbar) */
+#profile-completions {
+    /* max-height and overflow-y removed to disable scrollbar */
+    margin-top: 15px; /* Example spacing */
+    /* padding-right removed as scrollbar is gone */
+}
+
+/* Increase height of the timeline chart container */
+#profile-timeline-chart-container {
+    min-height: 350px; /* Increased height */
+    margin-top: 20px; /* Add some space above the chart */
 }
 
 .profile-header {
@@ -1913,6 +1929,26 @@ footer a:focus {
     border-color: var(--border-color-light);
 }
 
+
+\n/* --- Profile Page Specific Styles --- */
+#profile-timeline-chart-container {
+    /* Keep margin, but let wrapper control size */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.chart-wrapper { /* Style the new wrapper */
+    position: relative;
+    height: 400px; /* Set the desired height here */
+    width: 100%;
+}
+
+#completionTimelineChart {
+    display: block;
+    box-sizing: border-box;
+    height: 100%; /* Fill the wrapper height */
+    width: 100%; /* Fill the wrapper width */
+}
 
 /* --- Footer --- */
 footer {
