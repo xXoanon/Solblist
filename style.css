@@ -1892,6 +1892,85 @@ footer a:focus {
 }
 
 
+/* --- Changelog Page Specific Styles --- */
+
+.changelog-layout-container {
+    display: flex;
+    gap: 30px; /* Adjust gap between columns */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+#changelog-view,
+#list-changes-view {
+    flex: 1; /* Allow sections to grow and shrink */
+    min-width: 300px; /* Minimum width before wrapping */
+    /* Optional: Add some padding or margin if needed */
+    /* padding: 15px; */
+}
+
+/* Adjust section line width if needed within the flex container */
+.changelog-layout-container .section-line {
+    width: 100px; /* Make lines shorter */
+    margin-bottom: 20px;
+}
+
+.changelog-entry {
+    margin-bottom: 1.5rem; /* Space between entries */
+    padding: 1rem 1.5rem; /* Padding inside the card */
+    /* Inherits card styles like background, border-radius, shadow */
+}
+
+.changelog-version {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.changelog-date, .list-change-date-header {
+    font-size: 1.15em; /* Match .changelog-version */
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+    /* Uses text-secondary color defined elsewhere */
+    /* margin-left: 0.5rem; /* Space after version/before date */ /* Removed */
+}
+
+.list-change-date-header {
+    font-weight: 600; /* Make date header slightly bolder */
+    margin-bottom: 0.5rem;
+    margin-left: 0; /* Reset margin for the date header */
+    color: var(--heading-color); /* Match version header color */
+}
+
+.changelog-changes {
+    list-style: disc; /* Use standard bullet points */
+    padding-left: 25px; /* Indent list items */
+    margin-top: 0.5rem;
+    color: var(--text-color);
+}
+
+.changelog-changes li {
+    margin-bottom: 0.4rem; /* Space between list items */
+    line-height: 1.5;
+    font-size: 1em; /* Explicitly set base size */
+}
+
+/* Ensure List Changes items match */
+#list-changes-view ul {
+    list-style: disc;
+    padding-left: 25px;
+    margin-top: 0.5rem;
+    color: var(--text-color);
+}
+
+#list-changes-view li {
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+    font-size: 1em; /* Match changelog list items */
+}
+
+
 /* Style for the Challenge of the Month button on index.html */
 .challenge-link-section {
     text-align: center; /* Ensure button is centered */

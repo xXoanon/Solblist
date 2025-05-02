@@ -195,37 +195,33 @@ function createCompletionTimelineChart(playerCompletions) {
     const datedCompletions = playerCompletions
         .filter(comp => {
             if (!comp.completionDate) return false;
-            const parts = comp.completionDate.split('-');
-            if (parts.length !== 3) return false;
-            // Date.UTC expects month 0-11
-            const utcTimestamp = Date.UTC(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-            return !isNaN(utcTimestamp);
+            // Basic validation: YYYY-MM-DD
+            const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+            if (!dateRegex.test(comp.completionDate)) return false;
+            // Check if date is parseable
+            const date = new Date(comp.completionDate + 'T00:00:00Z'); // Assume UTC
+            return !isNaN(date.getTime());
         })
-        .sort((a, b) => {
-            const partsA = a.completionDate.split('-');
-            const partsB = b.completionDate.split('-');
-            const dateA = Date.UTC(parseInt(partsA[0], 10), parseInt(partsA[1], 10) - 1, parseInt(partsA[2], 10));
-            const dateB = Date.UTC(parseInt(partsB[0], 10), parseInt(partsB[1], 10) - 1, parseInt(partsB[2], 10));
-            return dateA - dateB;
-        });
+        .sort((a, b) => new Date(a.completionDate + 'T00:00:00Z') - new Date(b.completionDate + 'T00:00:00Z'));
 
     if (datedCompletions.length === 0) {
-        chartContainer.innerHTML = '<p>No dated completions available for timeline.</p>';
+        chartContainer.innerHTML = '<p>No completions with valid dates found to display timeline.</p>';
         return;
     }
 
-    // 2. Prepare chart data
-    const labels = datedCompletions.map(comp => comp.completionDate);
-    const dataPoints = datedCompletions.map((comp, index) => {
-        const parts = comp.completionDate.split('-');
-        const utcTimestamp = Date.UTC(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-        return {
-            x: utcTimestamp, // Use UTC timestamp for x-axis
-            y: index + 1, // Cumulative count for y-axis
-            levelName: comp.name, // Store level name for tooltip
-            levelRank: comp.rank // Store rank for tooltip
-        };
-    });
+    // 2. Prepare data for Chart.js
+    const chartData = datedCompletions.map(comp => ({
+        x: new Date(comp.completionDate + 'T00:00:00Z').getTime(), // Use UTC timestamp for x-axis
+        y: comp.rank > 15 ? 16 : comp.rank, // Map legacy ranks to 16
+        levelName: comp.name,   // Store level name for tooltip
+        isLegacy: comp.rank > 15 // Flag for legacy levels
+    }));
+
+    // Define colors
+    const primaryColor = getThemeStyle('--accent-color') || '#007bff'; // Fallback color
+    const primaryColorRgba = hexToRgba(primaryColor, 0.7);
+    const legacyColor = getThemeStyle('--text-color-secondary') || '#888888'; // Use secondary text color for legacy
+    const legacyColorRgba = hexToRgba(legacyColor, 0.7);
 
     // Destroy existing chart instance if it exists
     if (completionChartInstance) {
@@ -238,13 +234,15 @@ function createCompletionTimelineChart(playerCompletions) {
         type: 'line',
         data: {
             datasets: [{
-                label: 'Completions Over Time',
-                data: dataPoints,
-                fill: false,
-                borderColor: getThemeStyle('--accent-color') || 'rgb(75, 192, 192)', // Use theme color or default
-                tension: 0.1,
-                pointRadius: 5, // Make points visible
-                pointHoverRadius: 8 // Larger radius on hover
+                label: 'Completions by Rank',
+                data: chartData,
+                // --- Conditional Styling --- 
+                backgroundColor: context => context.raw && context.raw.isLegacy ? legacyColorRgba : primaryColorRgba,
+                borderColor: context => context.raw && context.raw.isLegacy ? legacyColor : primaryColor,
+                borderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                tension: 0.1 // Slight curve to the line
             }]
         },
         options: {
@@ -254,99 +252,90 @@ function createCompletionTimelineChart(playerCompletions) {
                 x: {
                     type: 'time',
                     time: {
-                        unit: 'month', // Adjust time unit as needed (e.g., 'day', 'week')
-                        // tooltipFormat removed as title callback handles it
-                        // Parser and adapters config removed to rely on default adapter behavior
+                        unit: 'month', // Adjust based on data range if needed
+                        tooltipFormat: 'MMM d, yyyy', // Format for tooltips
+                        displayFormats: {
+                            month: 'MMM yyyy' // Format for axis labels
+                        }
                     },
                     title: {
                         display: true,
                         text: 'Completion Date'
                     },
                     ticks: {
-                        color: getThemeStyle('--text-color') || '#000', // Use theme color or default
-                        font: {
-                            family: getThemeStyle('--font-primary').split(',')[0].trim() || 'sans-serif'
-                        },
-                        // Add callback to format axis ticks explicitly (similar to tooltip title)
-                        callback: function(value, index, ticks) {
-                            const date = new Date(value);
-                            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                            // Use UTC methods to avoid timezone issues affecting the date parts
-                            const month = months[date.getUTCMonth()];
-                            const day = date.getUTCDate();
-                            const year = date.getUTCFullYear();
-                            // Only show year for the first tick of a new year for clarity
-                            if (index > 0 && date.getUTCMonth() === 0 && new Date(ticks[index - 1].value).getUTCFullYear() !== year) {
-                                return `${month} ${day}, ${year}`;
-                            } else if (index === 0) {
-                                return `${month} ${day}, ${year}`;
-                            } else {
-                                return `${month} ${day}`;
-                            }
-                        }
+                        color: getThemeStyle('--text-color') // Use theme color
                     },
                     grid: {
-                        color: getThemeStyle('--border-color') || '#ccc' // Use theme color or default
+                        color: getThemeStyle('--border-color-light') // Use theme color
                     }
                 },
                 y: {
-                    beginAtZero: true,
+                    type: 'linear', // Explicitly set type
                     title: {
                         display: true,
-                        text: 'Cumulative Completions'
-                    },
+                        text: 'List Rank'
+                    }, 
+                    reverse: true, // Hardest rank (1) at the top
+                    min: 1,        // Set minimum rank
+                    max: 16,       // Set maximum rank (including LEGACY)
                     ticks: {
-                        color: getThemeStyle('--text-color') || '#000', // Use theme color or default
-                        stepSize: 1, // Ensure integer steps for count
-                        font: {
-                            family: getThemeStyle('--font-primary').split(',')[0].trim() || 'sans-serif'
+                        stepSize: 1, // Ensure ticks are generated for each integer rank
+                        precision: 0, // Ensure integer labels
+                        color: getThemeStyle('--text-color'), // Use theme color
+                        callback: function(value, index, ticks) {
+                            // Check if the value corresponds to the LEGACY rank
+                            if (value === 16) {
+                                return 'LEGACY'; // Show LEGACY for 16
+                            }
+                            // For values 1-15, return the integer value
+                            // Check if it's an integer to avoid potential floating point issues
+                            if (Number.isInteger(value) && value >= 1 && value <= 15) {
+                                return value;
+                            }
+                            // Return null for non-integer values or values outside 1-16 range if they occur
+                            return null; 
                         }
                     },
                     grid: {
-                        color: getThemeStyle('--border-color') || '#ccc' // Use theme color or default
+                        display: true, // Explicitly enable grid lines
+                        color: getThemeStyle('--border-color'), // Restore grid color
+                        // Draw grid lines only for the integer ranks + LEGACY
+                        drawOnChartArea: true // Ensure grid lines are drawn
                     }
                 }
             },
             plugins: {
+                legend: {
+                    display: false // Hide legend as it's only one dataset
+                },
                 tooltip: {
-                    backgroundColor: getThemeStyle('--card-bg-color') || 'rgba(0, 0, 0, 0.8)',
-                    titleColor: getThemeStyle('--heading-color') || '#ffffff',
-                    bodyColor: getThemeStyle('--text-color') || '#dddddd',
-                    borderColor: getThemeStyle('--border-color') || 'rgba(255, 255, 255, 0.1)',
-                    borderWidth: 1,
+                    backgroundColor: getThemeStyle('--background-color-tooltip') || 'rgba(0, 0, 0, 0.8)',
+                    titleColor: getThemeStyle('--text-color-tooltip-title') || '#ffffff',
+                    bodyColor: getThemeStyle('--text-color-tooltip-body') || '#ffffff',
                     callbacks: {
+                        // --- Custom Tooltip Label --- 
                         title: function(tooltipItems) {
-                            // Use the parsed date from the first tooltip item
+                            // Display the date as the title
                             const date = new Date(tooltipItems[0].parsed.x);
-                            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                            // Use UTC methods to avoid timezone issues affecting the date parts
-                            const month = months[date.getUTCMonth()];
-                            const day = date.getUTCDate();
-                            const year = date.getUTCFullYear();
-                            return `${month} ${day}, ${year}`; // Format as 'MMM d, yyyy'
+                            // Use toLocaleDateString for better formatting
+                            return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
                         },
                         label: function(context) {
-                            const completion = datedCompletions[context.dataIndex];
-                            return `Completed: #${completion.rank} ${completion.name}`;
-                        },
-                        footer: function(tooltipItems) {
-                            // Add total completions up to that point
-                            return `Total Completions: ${tooltipItems[0].parsed.y}`;
+                            const rank = context.raw.isLegacy ? 'LEGACY' : `#${context.parsed.y}`;
+                            const levelName = context.raw.levelName;
+                            return `${rank}: ${levelName}`;
                         }
                     }
-                },
-                legend: {
-                    display: false // Hide legend as it's not very useful here
                 }
             }
         }
     });
 
-    // Initial theme update for the newly created chart
-    updateCompletionChartTheme();
+    // Make container visible
+    chartContainer.style.display = 'block';
 }
 
-// --- Function to update chart theme --- 
+// --- Theme Handling for Chart --- 
 function updateCompletionChartTheme() {
     if (!completionChartInstance) return;
 
@@ -362,8 +351,13 @@ function updateCompletionChartTheme() {
     completionChartInstance.options.scales.y.ticks.color = textColor;
     completionChartInstance.options.scales.x.grid.color = borderColor;
     completionChartInstance.options.scales.y.grid.color = borderColor;
-    completionChartInstance.options.scales.x.ticks.font.family = fontPrimary;
-    completionChartInstance.options.scales.y.ticks.font.family = fontPrimary;
+    completionChartInstance.options.scales.y.grid.display = true; // Ensure grid display is true after theme update
+    if (completionChartInstance.options.scales.x.ticks.font) {
+        completionChartInstance.options.scales.x.ticks.font.family = fontPrimary;
+    }
+    if (completionChartInstance.options.scales.y.ticks.font) {
+        completionChartInstance.options.scales.y.ticks.font.family = fontPrimary;
+    }
 
     // Update dataset
     completionChartInstance.data.datasets[0].borderColor = accentColor;
@@ -374,9 +368,15 @@ function updateCompletionChartTheme() {
         completionChartInstance.options.plugins.tooltip.titleColor = textColor;
         completionChartInstance.options.plugins.tooltip.bodyColor = textColor;
         completionChartInstance.options.plugins.tooltip.footerColor = textColorMuted;
-        completionChartInstance.options.plugins.tooltip.titleFont.family = fontPrimary;
-        completionChartInstance.options.plugins.tooltip.bodyFont.family = fontPrimary;
-        completionChartInstance.options.plugins.tooltip.footerFont.family = fontPrimary;
+        if (completionChartInstance.options.plugins.tooltip.titleFont) {
+            completionChartInstance.options.plugins.tooltip.titleFont.family = fontPrimary;
+        }
+        if (completionChartInstance.options.plugins.tooltip.bodyFont) {
+            completionChartInstance.options.plugins.tooltip.bodyFont.family = fontPrimary;
+        }
+        if (completionChartInstance.options.plugins.tooltip.footerFont) {
+            completionChartInstance.options.plugins.tooltip.footerFont.family = fontPrimary;
+        }
         completionChartInstance.options.plugins.tooltip.borderColor = borderColor;
     }
 

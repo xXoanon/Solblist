@@ -74,22 +74,23 @@ function populateRankingsAndStats(rankingsContainer, statsContainer) {
     });
     rankingsContainer.appendChild(rankingsList);
 
-    // 4. Calculate and Populate List Stats
-    const totalLevels = solblistData.length;
-    const totalPossiblePoints = solblistData.reduce((sum, level) => sum + calculateListPoints(level.rank), 0);
-    const rankedPlayersCount = sortedPlayers.length;
-    const hardestLevel = solblistData.find(l => l.rank === 1);
-    const easiestLevel = solblistData.find(l => l.rank === totalLevels);
-    const averagePointsPerLevel = totalPossiblePoints / totalLevels;
+    // 4. Calculate and Populate List Stats (Main List Only - Top 15)
+    const mainListLevels = solblistData.filter(level => level.rank >= 1 && level.rank <= 15);
+    const totalLevels = mainListLevels.length; // Should be 15 if data is complete
+    const totalPossiblePoints = mainListLevels.reduce((sum, level) => sum + calculateListPoints(level.rank), 0);
+    const rankedPlayersCount = sortedPlayers.length; // Keep total ranked players
+    const hardestLevel = mainListLevels.find(l => l.rank === 1);
+    const easiestLevel = mainListLevels.find(l => l.rank === 15); // Easiest is #15
+    const averagePointsPerLevel = totalLevels > 0 ? totalPossiblePoints / totalLevels : 0; // Avoid division by zero
 
     statsContainer.innerHTML = `
         <h4>Quick Stats</h4>
         <ul>
-            <li>Total Levels: <strong>${totalLevels}</strong></li>
+            <li>Total Levels: <strong>${totalLevels}</strong> (Main List)</li>
             <li>Total Possible Points: <strong>${totalPossiblePoints.toFixed(2)}</strong></li>
             <li>Ranked Players: <strong>${rankedPlayersCount}</strong></li>
-            <li>Hardest Level: <strong>#${hardestLevel.rank} ${hardestLevel.name} (${calculateListPoints(hardestLevel.rank).toFixed(2)} pts)</strong></li>
-            <li>Easiest Level: <strong>#${easiestLevel.rank} ${easiestLevel.name} (${calculateListPoints(easiestLevel.rank).toFixed(2)} pts)</strong></li>
+            <li>Hardest Level: <strong>#${hardestLevel ? hardestLevel.rank : 'N/A'} ${hardestLevel ? hardestLevel.name : ''} (${hardestLevel ? calculateListPoints(hardestLevel.rank).toFixed(2) : 'N/A'} pts)</strong></li>
+            <li>Easiest Level: <strong>#${easiestLevel ? easiestLevel.rank : 'N/A'} ${easiestLevel ? easiestLevel.name : ''} (${easiestLevel ? calculateListPoints(easiestLevel.rank).toFixed(2) : 'N/A'} pts)</strong></li>
             <li>Average Points/Level: <strong>${averagePointsPerLevel.toFixed(2)} pts</strong></li>
         </ul>
     `;

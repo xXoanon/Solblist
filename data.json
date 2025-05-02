@@ -1,7 +1,7 @@
 [
     {
         "rank": 1,
-        "name": "BLACK BLIZZARD",
+        "name": "Black Blizzard",
         "victors": [
             {
                 "name": "Autumn",
@@ -18,7 +18,7 @@
     },
     {
         "rank": 2,
-        "name": "BLADE OF JUSTICE",
+        "name": "Blade of Justice",
         "victors": [
             {
                 "name": "Lapiz",
@@ -30,13 +30,25 @@
     },
     {
         "rank": 3,
-        "name": "MOMENT",
+        "name": "Bloodbath",
         "victors": [
             {
-                "name": "Bucket",
-                "completionUrl": "",
-                "completionDate": ""
+                "name": "Lapiz",
+                "completionUrl": "https://www.youtube.com/watch?v=e202OS4FDK0",
+                "completionDate": "2023-01-21"
             },
+            {
+                "name": "Autumn",
+                "completionUrl": "",
+                "completionDate": "2023-02-01"
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=A6xe4tKdx_c"
+    },
+    {
+        "rank": 4,
+        "name": "moment",
+        "victors": [
             {
                 "name": "Sky",
                 "completionUrl": "https://www.youtube.com/watch?v=SV5c8YsWyCw",
@@ -46,35 +58,28 @@
                 "name": "Zepp",
                 "completionUrl": "https://www.youtube.com/watch?v=z__bSR7Jw58",
                 "completionDate": "2023-11-25"
+            },
+            {
+                "name": "Bucket",
+                "completionUrl": "",
+                "completionDate": ""
             }
         ],
         "videoUrl": "https://www.youtube.com/watch?v=bLfKsN4NCNY"
     },
     {
-        "rank": 4,
-        "name": "BLOODBATH",
-        "victors": [
-            {
-                "name": "Autumn",
-                "completionUrl": "",
-                "completionDate": "2023-02-01"
-            },
-            {
-                "name": "Lapiz",
-                "completionUrl": "https://www.youtube.com/watch?v=e202OS4FDK0",
-                "completionDate": "2023-01-21"
-            }
-        ],
-        "videoUrl": "https://www.youtube.com/watch?v=A6xe4tKdx_c"
-    },
-    {
         "rank": 5,
-        "name": "GRAVITY",
+        "name": "gravity",
         "victors": [
             {
                 "name": "Excess",
                 "completionUrl": "https://youtu.be/jhYL7DsAxTI",
                 "completionDate": "2023-11-25"
+            },
+            {
+                "name": "Zepp",
+                "completionUrl": "",
+                "completionDate": "2024-03-27"
             }
         ],
         "videoUrl": "https://www.youtube.com/watch?v=Ba4PkcqiZa4"
@@ -93,19 +98,7 @@
     },
     {
         "rank": 7,
-        "name": "CUPID",
-        "victors": [
-            {
-                "name": "Lapiz",
-                "completionUrl": "https://www.youtube.com/watch?v=lBVZwXTvXO8",
-                "completionDate": "2025-02-28"
-            }
-        ],
-        "videoUrl": "https://www.youtube.com/watch?v=6HKERcnzQsU"
-    },
-    {
-        "rank": 8,
-        "name": "DOWN BASS",
+        "name": "Down Bass",
         "victors": [
             {
                 "name": "Autumn",
@@ -116,8 +109,8 @@
         "videoUrl": "https://www.youtube.com/watch?v=gyRjfhKYQeU"
     },
     {
-        "rank": 9,
-        "name": "AFTERMATH",
+        "rank": 8,
+        "name": "aftermath",
         "victors": [
             {
                 "name": "Lapiz",
@@ -128,8 +121,8 @@
         "videoUrl": "https://www.youtube.com/watch?v=yBpvgZ-4NAg"
     },
     {
-        "rank": 10,
-        "name": "OVERTIME",
+        "rank": 9,
+        "name": "Overtime",
         "victors": [
             {
                 "name": "Zepp",
@@ -140,8 +133,20 @@
         "videoUrl": "https://www.youtube.com/watch?v=48SfAwLjaJU"
     },
     {
+        "rank": 10,
+        "name": "Cupid",
+        "victors": [
+            {
+                "name": "Lapiz",
+                "completionUrl": "https://www.youtube.com/watch?v=lBVZwXTvXO8",
+                "completionDate": "2025-02-28"
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=6HKERcnzQsU"
+    },
+    {
         "rank": 11,
-        "name": "BROKEN SIGNAL",
+        "name": "Broken Signal",
         "victors": [
             {
                 "name": "Bucket",
@@ -153,6 +158,18 @@
     },
     {
         "rank": 12,
+        "name": "Napalm",
+        "victors": [
+            {
+                "name": "Excess",
+                "completionUrl": "https://www.youtube.com/watch?v=syIjnY1qZd8",
+                "completionDate": "2023-05-20"
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=29NTgRXWuMc"
+    },
+    {
+        "rank": 13,
         "name": "TROLLMACHINE",
         "victors": [
             {
@@ -164,32 +181,8 @@
         "videoUrl": "https://www.youtube.com/watch?v=VSw1c3L8szo"
     },
     {
-        "rank": 13,
-        "name": "NAPALM",
-        "victors": [
-            {
-                "name": "Excess",
-                "completionUrl": "https://www.youtube.com/watch?v=syIjnY1qZd8",
-                "completionDate": "2023-05-20"
-            }
-        ],
-        "videoUrl": "https://www.youtube.com/watch?v=29NTgRXWuMc"
-    },
-    {
         "rank": 14,
-        "name": "ALLEGIANCE",
-        "victors": [
-            {
-                "name": "d050",
-                "completionUrl": "https://www.youtube.com/watch?v=im6uBPF6dIw",
-                "completionDate": "2023-03-06"
-            }
-        ],
-        "videoUrl": "https://www.youtube.com/watch?v=lHf6buYpbXU"
-    },
-    {
-        "rank": 15,
-        "name": "CROWD CONTROL",
+        "name": "Crowd Control",
         "victors": [
             {
                 "name": "Excess",
@@ -204,14 +197,45 @@
         ],
         "videoUrl": "https://www.youtube.com/watch?v=-q0iBUZti9s"
     },
-        {
-        "rank": 16,
-        "name": "AZURITE",
+    {
+        "rank": 15,
+        "name": "Falling Up",
         "victors": [
             {
-                "name": "Bucket",
+                "name": "Autumn",
                 "completionUrl": "",
                 "completionDate": ""
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=gHHqPIvZXeM"
+    },
+    {
+        "rank": 16,
+        "name": "Allegiance",
+        "victors": [
+            {
+                "name": "d050",
+                "completionUrl": "https://www.youtube.com/watch?v=im6uBPF6dIw",
+                "completionDate": "2023-03-06"
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=lHf6buYpbXU"
+    },
+    {
+        "rank": 17,
+        "name": "Cataclysm",
+        "victors": [
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=vGV4j8C66JY"
+    },
+    {
+        "rank": 18,
+        "name": "Azurite",
+        "victors": [
+            {
+                "name": "Lapiz",
+                "completionUrl": "https://www.youtube.com/watch?v=HcjtGHZOOXQ",
+                "completionDate": "2022-10-01"
             },
             {
                 "name": "Excess",
@@ -219,16 +243,23 @@
                 "completionDate": "2023-09-17"
             },
             {
-                "name": "Lapiz",
-                "completionUrl": "https://www.youtube.com/watch?v=HcjtGHZOOXQ",
-                "completionDate": "2022-10-01"
-            },
-            {
                 "name": "Zepp",
                 "completionUrl": "https://www.youtube.com/watch?v=3bpaVOS53cE",
                 "completionDate": "2024-06-13"
+            },
+            {
+                "name": "Bucket",
+                "completionUrl": "",
+                "completionDate": ""
             }
         ],
         "videoUrl": "https://www.youtube.com/watch?v=yQRMhKruCPw"
+    },
+    {
+        "rank": 19,
+        "name": "Acu",
+        "victors": [
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=z6l74Mkoxm8"
     }
 ]

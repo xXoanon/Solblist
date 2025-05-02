@@ -1,0 +1,138 @@
+/* Styles for the Legacy List */
+
+.legacy-separator {
+    border: none;
+    /* border-top: 2px dashed var(--text-color, #ccc); */ /* Original dashed */
+    border-top: 1px solid var(--border-color-light, #555); /* Nicer solid line */
+    margin: 2.5rem auto; /* More vertical space, centered */
+    opacity: 0.8; /* Slightly more visible */
+    width: 80%; /* Don't span full width */
+}
+
+/* New styles for the heading container */
+.legacy-heading-container {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    /* justify-content: center; Remove, align-items handles centering in column */
+    gap: 0.5rem; /* Adjust gap for vertical spacing */
+    /* width: 100%; Remove full width */
+    /* text-align: center; Remove text-align */
+    margin-bottom: 15px; /* Keep original bottom margin */
+    /* padding-bottom: 5px; Remove padding from container */
+    /* border-bottom: 1px solid var(--border-color-light); Remove border from container */
+    /* padding: 0 1rem; Remove padding */
+    /* gap: 1rem; Remove gap */
+}
+
+.legacy-heading {
+    /* display: inline-block; Remove */
+    /* vertical-align: middle; Remove */
+    /* flex-grow: 1; Remove flex-grow */
+    font-size: 2em; /* Match .section-title */
+    color: var(--heading-color); /* Match .section-title */
+    padding-bottom: 5px; /* Re-add padding to heading */
+    border-bottom: 1px solid var(--border-color-light); /* Re-add border to heading */
+    margin: 0; /* Ensure no margin */
+    text-align: center; /* Center heading text */
+}
+
+/* Styles for the toggle button - Mirrored from .challenge-button */
+#toggle-legacy-button {
+    display: inline-block; /* Ensure padding and margins work correctly */
+    padding: 8px 16px; /* Reduced padding for smaller size */
+    font-size: 1em; /* Reduced font size */
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: var(--border-radius-md);
+    background-color: transparent; /* Outline style */
+    color: var(--accent-color); /* Text color matches border */
+    border: 2px solid var(--accent-color); /* Accent color border */
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    margin-top: 5px; /* Keep some space below the heading */
+    text-align: center; /* Ensure text is centered */
+}
+
+#toggle-legacy-button:hover,
+#toggle-legacy-button:focus {
+    background-color: var(--accent-color); /* Fill on hover/focus */
+    color: var(--button-text); /* Text color changes on hover/focus */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-color); /* Keep border color consistent */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Remove separate :focus-visible and :active styles if covered by :focus */
+/* #toggle-legacy-button:focus-visible { ... } */
+/* #toggle-legacy-button:active { ... } */
+
+
+/* Styles for individual legacy list items */
+.legacy-item {
+    /* Reduce overall prominence */
+    transform: scale(0.90); /* Even smaller */
+    opacity: 0.80; /* Slightly more faded */
+    margin-bottom: 0.4rem; /* Slightly reduce space between legacy items */
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.legacy-item:hover {
+    transform: scale(0.92); /* Slightly larger on hover, but still smaller than main */
+    opacity: 0.95; /* Less opaque on hover */
+}
+
+/* Style the 'LEGACY' text specifically */
+.legacy-rank-text {
+    font-size: 0.8em; /* Smaller than the level name */
+    font-weight: 500; /* Less bold */
+    color: var(--text-color-secondary); /* Less prominent color */
+    margin-right: 0.4em; /* Add a bit of space */
+    vertical-align: middle; /* Align nicely with the level name */
+}
+
+/* Optional: Adjust thumbnail size within legacy items if needed */
+/* .legacy-item .video-thumbnail { */
+    /* Example: make thumbnail slightly smaller */
+    /* width: 90px; */
+    /* height: 50px; */
+/* } */
+
+/* Optional: Adjust level name font size within legacy items */
+/* .legacy-item .level-name { */
+     /* Example: slightly smaller font */
+    /* font-size: 1.1em; */
+/* } */
+
+/* Optional: Adjust victors text size within legacy items */
+/* .legacy-item .victors { */
+    /* Example: slightly smaller font */
+    /* font-size: 0.85em; */
+/* } */
+
+/* Styles for the container to enable animation */
+#legacy-list-container {
+    width: 100%;
+    overflow: hidden; /* Crucial for max-height transition */
+    max-height: 1000px; /* Set a large enough max-height for the expanded state */
+    opacity: 1;
+    transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.5s ease-in-out, padding-top 0.5s ease-in-out, padding-bottom 0.5s ease-in-out; /* Smooth transition */
+    /* Add some padding/margin that will also collapse */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: 1rem; 
+}
+
+/* Rule to hide legacy items using max-height and opacity for animation */
+#legacy-list-container.legacy-items-hidden {
+    max-height: 0;
+    opacity: 0;
+    /* Collapse padding/margin when hidden */
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    /* Ensure no interaction when hidden */
+    pointer-events: none;
+}

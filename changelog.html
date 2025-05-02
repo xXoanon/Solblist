@@ -30,14 +30,25 @@
     </header>
 
     <main>
-        <section id="changelog-view">
-            <h2 class="section-title">Website Changelog</h2>
+        <div class="changelog-layout-container"> <!-- Added container -->
+            <section id="changelog-view">
+                <h2 class="section-title">Website Changelog</h2>
             <hr class="header-line section-line">
             <div id="changelog-container">
                 <p>Loading changelog...</p>
                 <!-- Changelog entries will be loaded here by changelog.js -->
             </div>
         </section>
+
+        <section id="list-changes-view">
+            <h2 class="section-title">List Changelog</h2>
+            <hr class="header-line section-line">
+            <div id="list-changes-container">
+                <p>Loading list changes...</p>
+                <!-- List changes will be loaded here by changelog.js -->
+            </div>
+            </section>
+        </div> <!-- Close container -->
     </main>
 
     <footer>
