@@ -2,6 +2,7 @@
     {
         "rank": 1,
         "name": "Black Blizzard",
+        "levelId": "34057654",
         "victors": [
             {
                 "name": "Autumn",
@@ -19,6 +20,7 @@
     {
         "rank": 2,
         "name": "Blade of Justice",
+        "levelId": "35448603",
         "victors": [
             {
                 "name": "Lapiz",
@@ -31,6 +33,7 @@
     {
         "rank": 3,
         "name": "Bloodbath",
+        "levelId": "10565740",
         "victors": [
             {
                 "name": "Lapiz",
@@ -48,6 +51,7 @@
     {
         "rank": 4,
         "name": "moment",
+        "levelId": "68848817",
         "victors": [
             {
                 "name": "Sky",
@@ -70,6 +74,7 @@
     {
         "rank": 5,
         "name": "gravity",
+        "levelId": "77008332",
         "victors": [
             {
                 "name": "Excess",
@@ -87,6 +92,7 @@
     {
         "rank": 6,
         "name": "DIRT",
+        "levelId": "95463838",
         "victors": [
             {
                 "name": "Lapiz",
@@ -99,6 +105,7 @@
     {
         "rank": 7,
         "name": "Down Bass",
+        "levelId": "8147005",
         "victors": [
             {
                 "name": "Autumn",
@@ -111,6 +118,7 @@
     {
         "rank": 8,
         "name": "aftermath",
+        "levelId": "25610878",
         "victors": [
             {
                 "name": "Lapiz",
@@ -123,6 +131,7 @@
     {
         "rank": 9,
         "name": "Overtime",
+        "levelId": "83825373",
         "victors": [
             {
                 "name": "Zepp",
@@ -135,6 +144,7 @@
     {
         "rank": 10,
         "name": "Cupid",
+        "levelId": "95757926",
         "victors": [
             {
                 "name": "Lapiz",
@@ -147,6 +157,7 @@
     {
         "rank": 11,
         "name": "Broken Signal",
+        "levelId": "69108628",
         "victors": [
             {
                 "name": "Bucket",
@@ -159,6 +170,7 @@
     {
         "rank": 12,
         "name": "Napalm",
+        "levelId": "65561437",
         "victors": [
             {
                 "name": "Excess",
@@ -171,6 +183,7 @@
     {
         "rank": 13,
         "name": "TROLLMACHINE",
+        "levelId": "84325817",
         "victors": [
             {
                 "name": "Zepp",
@@ -183,6 +196,7 @@
     {
         "rank": 14,
         "name": "Crowd Control",
+        "levelId": "69491632",
         "victors": [
             {
                 "name": "Excess",
@@ -200,6 +214,7 @@
     {
         "rank": 15,
         "name": "Falling Up",
+        "levelId": "24301797",
         "victors": [
             {
                 "name": "Autumn",
@@ -212,6 +227,7 @@
     {
         "rank": 16,
         "name": "Allegiance",
+        "levelId": "20761188",
         "victors": [
             {
                 "name": "d050",
@@ -224,6 +240,7 @@
     {
         "rank": 17,
         "name": "Cataclysm",
+        "levelId": "3979721",
         "victors": [
         ],
         "videoUrl": "https://www.youtube.com/watch?v=vGV4j8C66JY"
@@ -231,6 +248,7 @@
     {
         "rank": 18,
         "name": "Azurite",
+        "levelId": "62214792",
         "victors": [
             {
                 "name": "Lapiz",
@@ -258,6 +276,7 @@
     {
         "rank": 19,
         "name": "Acu",
+        "levelId": "61079355",
         "victors": [
         ],
         "videoUrl": "https://www.youtube.com/watch?v=z6l74Mkoxm8"

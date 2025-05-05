@@ -28,6 +28,16 @@
         "Fixed the placement of first victors on the list.",
         "Removed Herobrine again."
       ]
+    },
+    {
+      "version": "2.03",
+      "date": "2025-05-05",
+      "changes": [
+        "Added level IDs to the list.",
+        "Made the 'Levels Completed' stat on the player profiles just account for the main list.",
+        "I am inside your home.",
+        "You left your door unlocked."
+      ]
     }
   ],
   "listChanges": [
@@ -38,6 +48,12 @@
         "Cupid has been lowered from #7 to #10, above Broken Signal and below Overtime.",
         "Napalm and TROLLMACHINE have been swapped, with Napalm now above at #12.",
         "Falling Up has been raised from the Legacy List to #15, below Crowd Control. This pushes Allegiance into the Legacy List."
+      ]
+    },
+    {
+      "date": "2025-05-05",
+      "changes": [
+        "Falling Up and Crowd Control have been swapped, with Falling up now above at #14."
       ]
     }
   ]

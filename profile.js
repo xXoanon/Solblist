@@ -63,7 +63,9 @@ function loadSingleProfile(playerName, contentContainer) {
     // 1. Find all completions by this player
     const playerCompletions = [];
     let totalPoints = 0;
-    const totalLevels = solblistData.length; // Get total number of levels
+    // const totalLevels = solblistData.length; // Get total number of levels
+    const mainListLevels = solblistData.filter(level => level.rank >= 1 && level.rank <= 15);
+    const totalLevels = mainListLevels.length; // Count only main list levels
 
     solblistData.forEach(level => {
         const victorData = level.victors.find(v => v.name === playerName);
@@ -86,8 +88,12 @@ function loadSingleProfile(playerName, contentContainer) {
         return;
     }
 
-    // Calculate progress percentage
-    const progressPercentage = totalLevels > 0 ? (playerCompletions.length / totalLevels) * 100 : 0;
+    // Filter completions to only include main list levels for stats display
+    const mainListCompletions = playerCompletions.filter(comp => comp.rank >= 1 && comp.rank <= 15);
+    const mainListCompletionsCount = mainListCompletions.length;
+
+    // Calculate progress percentage based on main list
+    const progressPercentage = totalLevels > 0 ? (mainListCompletionsCount / totalLevels) * 100 : 0;
 
     // Update page title
     document.title = `${playerName}'s Profile - The Solblist`;
@@ -113,7 +119,7 @@ function loadSingleProfile(playerName, contentContainer) {
     if (headerContainer) {
         headerContainer.innerHTML = `
             <h2 class="profile-name">${playerName}</h2>
-            <p class="profile-stats">Total Points: <strong>${totalPoints.toFixed(2)}</strong> | Levels Completed: <strong>${playerCompletions.length} / ${totalLevels}</strong></p>
+            <p class="profile-stats">Total Points: <strong>${totalPoints.toFixed(2)}</strong> | Levels Completed (Main List): <strong>${mainListCompletionsCount} / ${totalLevels}</strong></p>
             <div class="stat-item progress-stat">
                 <span class="stat-label">List Progress</span>
                 <div class="progress-bar-container">

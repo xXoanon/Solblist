@@ -181,6 +181,7 @@ const modalTitle = document.getElementById('modal-level-title');
 const modalVideoContainer = document.getElementById('modal-video-container');
 const modalVictorsList = document.getElementById('modal-victors-list');
 const modalLevelPoints = document.getElementById('modal-level-points'); // Added for points
+const modalLevelId = document.getElementById('modal-level-id'); // Added for Level ID
 const closeModalButton = modal ? modal.querySelector('.modal-close-button') : null;
 
 function openLevelModal(rank) {
@@ -196,6 +197,10 @@ function openLevelModal(rank) {
     // Populate Modal Title - Adjust for Legacy
     const modalRankDisplay = level.rank <= 15 ? `#${level.rank}` : '<span class="legacy-rank-text">LEGACY</span>';
     modalTitle.innerHTML = `${modalRankDisplay} ${level.name}`; // Use innerHTML to render the span
+    const modalLevelId = document.getElementById('modal-level-id'); // Get the new element
+    if (modalLevelId) {
+        modalLevelId.textContent = `Level ID: ${level.levelId || 'N/A'}`;
+    }
 
     // Populate Video
     const videoId = getYouTubeId(level.videoUrl);
