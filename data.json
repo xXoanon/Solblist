@@ -195,6 +195,19 @@
     },
     {
         "rank": 14,
+        "name": "Falling Up",
+        "levelId": "24301797",
+        "victors": [
+            {
+                "name": "Autumn",
+                "completionUrl": "",
+                "completionDate": ""
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=gHHqPIvZXeM"
+    },
+        {
+        "rank": 15,
         "name": "Crowd Control",
         "levelId": "69491632",
         "victors": [
@@ -210,19 +223,6 @@
             }
         ],
         "videoUrl": "https://www.youtube.com/watch?v=-q0iBUZti9s"
-    },
-    {
-        "rank": 15,
-        "name": "Falling Up",
-        "levelId": "24301797",
-        "victors": [
-            {
-                "name": "Autumn",
-                "completionUrl": "",
-                "completionDate": ""
-            }
-        ],
-        "videoUrl": "https://www.youtube.com/watch?v=gHHqPIvZXeM"
     },
     {
         "rank": 16,
