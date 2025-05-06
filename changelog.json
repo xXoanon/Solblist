@@ -55,6 +55,13 @@
       "changes": [
         "Falling Up and Crowd Control have been swapped, with Falling up now above at #14."
       ]
+    },
+        {
+      "date": "2025-05-05",
+      "changes": [
+        "Solarion has been placed at #1, dethroning Black Blizzard that has reigned for 1494 days. This pushes Crowd Control into the legacy list.",
+        "Voided added to the legacy list."
+      ]
     }
   ]
 }
