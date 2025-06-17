@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Statistics - The Solblist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Added Chart.js -->
+</head>
+<body>
+    <header>
+        <h1>THE SOLBLIST™</h1>
+        <div class="theme-selector-container">
+            <label for="theme-selector">Theme:</label>
+            <select id="theme-selector">
+                <!-- Options will be populated by common.js -->
+            </select>
+        </div>
+        <!-- Navigation Links (will be updated later) -->
+        <nav class="main-nav">
+            <a href="/staging/index.html" class="nav-link">List</a>
+            <a href="/staging/profiles.html" class="nav-link">Profiles</a>
+            <a href="/staging/compare.html" class="nav-link">Compare</a>
+            <a href="/staging/stats.html" class="nav-link active">Stats</a>
+            <a href="/staging/changelog.html" class="nav-link">Changelog</a>
+            <a href="/staging/about.html" class="nav-link">About</a>
+        </nav>
+        <hr class="header-line">
+    </header>
+
+    <main>
+        <section id="stats-view">
+            <h2 class="section-title">General Statistics</h2>
+            <hr class="header-line section-line">
+            <div id="stats-content-container">
+                <!-- Statistics and chart will be loaded here by stats.js -->
+                <p>Loading statistics...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="version-info">v2.0</p> <!-- Consider updating version later -->
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="stats.js"></script> <!-- Link to the new stats script -->
+</body>
+</html>

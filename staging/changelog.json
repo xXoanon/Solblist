@@ -1,0 +1,67 @@
+{
+  "versionChanges": [
+    {
+      "version": "2.0",
+      "date": "2025-04-29",
+      "changes": [
+        "The launch of the revamped and improved Solblist™ website.",
+        "New additions includes Player Profiles, Compare, Stats, Themes, and more.",
+        "Removed Herobrine."
+      ]
+    },
+    {
+      "version": "2.01",
+      "date": "2025-05-01",
+      "changes": [
+        "Added 'Completion Timeline' to the Player Profiles page.",
+        "Changed the fonts for the 'Hell', 'Pastel', and 'Rainbow' themes to make them more readable.",
+        "Added Herobrine."
+      ]
+    },
+    {
+      "version": "2.02",
+      "date": "2025-05-02",
+      "changes": [
+        "Added the 'Legacy List' (finally). Some legacy levels don't have victors because I dont know them.",
+        "Changed the y-axis on the 'Completion Timeline' graph to 'List Rank', because that makes more sense.",
+        "Added 'List Changelog' to the Changelog page. You can see it on the right here. --->",
+        "Fixed the placement of first victors on the list.",
+        "Removed Herobrine again."
+      ]
+    },
+    {
+      "version": "2.03",
+      "date": "2025-05-05",
+      "changes": [
+        "Added level IDs to the list.",
+        "Made the 'Levels Completed' stat on the player profiles just account for the main list.",
+        "I am inside your home.",
+        "You left your door unlocked."
+      ]
+    }
+  ],
+  "listChanges": [
+    {
+      "date": "2025-05-02",
+      "changes": [
+        "Bloodbath and moment have been swapped, with Bloodbath now above at #3.",
+        "Cupid has been lowered from #7 to #10, above Broken Signal and below Overtime.",
+        "Napalm and TROLLMACHINE have been swapped, with Napalm now above at #12.",
+        "Falling Up has been raised from the Legacy List to #15, below Crowd Control. This pushes Allegiance into the Legacy List."
+      ]
+    },
+    {
+      "date": "2025-05-04",
+      "changes": [
+        "Falling Up and Crowd Control have been swapped, with Falling up now above at #14."
+      ]
+    },
+        {
+      "date": "2025-05-05",
+      "changes": [
+        "Solarion has been placed at #1, dethroning Black Blizzard that has reigned for 1494 days. This pushes Crowd Control into the legacy list.",
+        "Voided added to the legacy list."
+      ]
+    }
+  ]
+}

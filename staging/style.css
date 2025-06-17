@@ -1,0 +1,2065 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap'); /* Hell */
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap'); /* Mechanical */
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap'); /* Pastel Dream */
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'); /* Rainbow */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap'); /* Forest */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Retro */
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap"'); /* Rainbow New */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap'); /* Hell New */
+
+:root {
+    /* Base Variables (can be overridden by themes) */
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+}
+
+/* --- Theme Definitions --- */
+
+/* 1. Dark Theme */
+[data-theme="dark"] {
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --bg-color: #121212;
+    --bg-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    --bg-size: 30px 30px;
+    --bg-color-secondary: #1e1e1e;
+    --card-bg-color: #2a2a2a;
+    --text-color: #e0e0e0;
+    --text-color-secondary: #b0b0b0;
+    --heading-color: #ffffff;
+    --accent-color: #00aaff;
+    --accent-color-secondary: #40c4ff;
+    --border-color: #444444;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --link-color: var(--accent-color);
+    --link-hover-color: #53d1ff;
+    --button-bg: var(--accent-color);
+    --button-text: #ffffff;
+    --button-hover-bg: var(--link-hover-color);
+    --header-line-gradient: linear-gradient(to right, #008080, #00FFFF); /* Teal to Cyan */
+    --victor-link-color: inherit;
+}
+
+/* 2. Light Theme */
+[data-theme="light"] {
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --bg-color: #f8f9fa;
+    /* Added grid background with dark lines */
+    --bg-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    --bg-size: 30px 30px;
+    --bg-color-secondary: #ffffff;
+    --card-bg-color: #ffffff;
+    --text-color: #343a40;
+    --text-color-secondary: #6c757d;
+    --heading-color: #212529;
+    --accent-color: #007bff;
+    --accent-color-secondary: #56a7ff;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --link-color: var(--accent-color);
+    --link-hover-color: #0056b3;
+    --button-bg: var(--accent-color);
+    --button-text: #000000;
+    --button-hover-bg: var(--link-hover-color);
+    --header-line-gradient: linear-gradient(to right, #FFDAB9, #FFB6C1); /* Soft Orange to Gentle Pink */
+    --victor-link-color: var(--text-color-secondary);
+}
+
+/* 3. Hell Theme (Red/Black) */
+[data-theme="hell"] {
+    --font-primary: 'Special Elite', cursive;
+    --font-mono: 'Roboto Mono', monospace;
+    --bg-color: #330000;
+    /* Corrected Zig-Zag Pattern */
+    --bg-image:
+        repeating-linear-gradient(45deg, #000000, #000000 5px, transparent 5px, transparent 10px),
+        repeating-linear-gradient(-45deg, #000000, #000000 5px, transparent 5px, transparent 10px);
+    --bg-size: 14px 14px; /* Adjusted size for zig-zag */
+    --bg-color-secondary: #1a0000;
+    --card-bg-color: #330000;
+    --text-color: #ff4d4d;
+    --text-color-secondary: #cc0000;
+    --heading-color: #ff6666;
+    --accent-color: #dc143c; /* Crimson */
+    --accent-color-secondary: #ff8c00; /* Dark Orange */
+    --border-color: #8b0000; /* Dark Red */
+    --shadow-color: rgba(100, 0, 0, 0.6);
+    --link-color: var(--accent-color);
+    --link-hover-color: #ff4757;
+    --button-bg: var(--accent-color);
+    --button-text: #ffffff;
+    --button-hover-bg: var(--link-hover-color);
+    --header-line-gradient: linear-gradient(to right, var(--accent-color), #ff6347 /* Tomato */);
+    --victor-link-color: #cc0000;
+}
+
+/* 4. Mechanical Theme (Blue/Steel) */
+[data-theme="mechanical"] {
+    --font-primary: 'Audiowide', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --bg-color: #2b4482; /* Dark Slate Blue */
+    /* Noise/Brushed Metal Pattern - Larger, more visible noise */
+    --bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.25' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+    --bg-size: auto;
+    --bg-position: 0 0;
+    --bg-color-secondary: #34495e; /* Slightly Lighter Slate Blue */
+    --card-bg-color: #455565; /* Grayish Blue */
+    --text-color: #ecf0f1; /* Light Gray */
+    --text-color-secondary: #bdc3c7; /* Silver */
+    --heading-color: #5dade2; /* Light Blue */
+    --accent-color: #3498db; /* Medium Blue */
+    --accent-color-secondary: #2980b9; /* Darker Blue */
+    --border-color: #7f8c8d; /* Gray */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --link-color: var(--heading-color);
+    --link-hover-color: #85c1e9;
+    --button-bg: var(--accent-color);
+    --button-text: #ffffff;
+    --button-hover-bg: var(--accent-color-secondary);
+    --header-line-gradient: linear-gradient(to right, var(--heading-color), var(--accent-color));
+    --victor-link-color: #bdc3c7;
+}
+
+/* 5. Pastel Dream Theme (Soft Purple/Blue) */
+[data-theme="pastel-dream"] {
+    --font-primary: 'Sour Gummy', cursive;
+    --font-mono: 'Inter', sans-serif;
+    --bg-color: #e1d5e7; /* Pale Lavender */
+    /* Varied Size Polka Dot Pattern */
+    --bg-image: radial-gradient(rgba(182, 160, 255, 0.3) 10%, transparent 11%),
+                 radial-gradient(rgba(160, 196, 255, 0.25) 15%, transparent 16%),
+                 radial-gradient(rgba(182, 160, 255, 0.35) 5%, transparent 6%);
+    --bg-size: 60px 60px, 40px 40px, 80px 80px; /* Different sizes */
+    --bg-position: 0 0, 20px 20px, 10px 40px; /* Different positions */
+    --bg-color-secondary: #f0eaf6; /* Very Pale Lavender */
+    --card-bg-color: #ffffff;
+    --text-color: #5c5470; /* Dusky Purple */
+    --text-color-secondary: #8b839a; /* Muted Purple */
+    --heading-color: #352f44; /* Darker Dusky Purple */
+    --accent-color: #a0c4ff; /* Pastel Blue */
+    --accent-color-secondary: #b6a0ff; /* Pastel Purple */
+    --border-color: #dcd6e1; /* Light Grayish Lavender */
+    --shadow-color: rgba(182, 160, 255, 0.2);
+    --link-color: var(--accent-color-secondary);
+    --link-hover-color: #948bff;
+    --button-bg: var(--accent-color);
+    --button-text: #352f44;
+    --button-hover-bg: #c2d9ff;
+    --header-line-gradient: linear-gradient(to right, var(--accent-color), var(--accent-color-secondary));
+    --victor-link-color: #8b839a;
+}
+
+/* 6. Rainbow Theme */
+[data-theme="rainbow"] {
+    --font-primary: 'Sigmar One', cursive;
+    --font-mono: 'Inter', sans-serif;
+    --bg-color: #ababab; /* Slightly darker base */
+    /* Diagonal Rainbow Stripes - Desaturated with added colors */
+    --bg-image: repeating-linear-gradient(
+        -45deg,
+        #b32d2d /* Desaturated Red */, #b32d2d 15px,
+        #c77e30 /* Desaturated Orange */ 15px, #c77e30 30px,
+        #b8b831 /* Desaturated Yellow */ 30px, #b8b831 45px,
+        #80b336 /* Desaturated Lime */ 45px, #80b336 60px, /* Added Lime */
+        #368036 /* Desaturated Green */ 60px, #368036 75px,
+        #33b374 /* Desaturated Spring Green */ 75px, #33b374 90px, /* Added Spring Green */
+        #00aaaa /* Desaturated Cyan */ 90px, #00aaaa 105px,
+        #337ec0 /* Desaturated Sky Blue */ 105px, #337ec0 120px, /* Added Sky Blue */
+        #31319a /* Desaturated Blue */ 120px, #31319a 135px,
+        #723ba8 /* Desaturated Indigo */ 135px, #723ba8 150px,
+        #b22eb2 /* Desaturated Magenta */ 150px, #b22eb2 165px, /* Added Magenta */
+        #d12f80 /* Desaturated Rose */ 165px, #d12f80 180px /* Added Rose */
+    );
+    --bg-size: 255px 255px; /* sqrt(180^2 + 180^2) for seamless diagonal repeat */
+    --bg-color-secondary: rgba(69, 69, 69, 0.85); /* Semi-transparent light gray */
+    --card-bg-color: rgba(0, 0, 0, 0.95); /* More opaque white */
+    --text-color: #ffffff;
+    --text-color-secondary: #ffffff;
+    --heading-color: #ffffff;
+    --accent-color: #ffffff; /* White */
+    --accent-color-secondary: #00ffbf; /* Spring Green */
+    --border-color: #dddddd;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --link-color: #007bff;
+    --link-hover-color: #ff007f;
+    --button-bg: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    --button-text: #ffffff;
+    --button-hover-bg: linear-gradient(to right, #ff4d4d, #ffa54d, #ffff4d, #4dff4d, #4d4dff, #9a4dff, #ff4dff);
+    --header-line-gradient: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    --victor-link-color: #c54848;
+    /* Animation for background */
+    animation: rainbow-bg-scroll 10s linear infinite;
+}
+
+/* Chart Container Styling */
+.chart-container {
+    position: relative; /* Needed for Chart.js responsiveness */
+    margin: 20px auto; /* Center the chart with some margin */
+    padding: 15px;
+    height: 400px; /* Adjust height as needed */
+    max-width: 90%; /* Prevent it from getting too wide on large screens */
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subsection-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* 8. Retro Gaming Theme (Green/Black) */
+[data-theme="retro"] {
+    font-size: 1rem; /* Reduce base font size for retro theme */
+    --font-primary: 'Press Start 2P', cursive;
+    --font-mono: 'Press Start 2P', cursive;
+    /* Use a pixelated font if available, otherwise fallback */
+    --font-primary: 'Press Start 2P', 'Courier New', Courier, monospace; /* Requires importing 'Press Start 2P' */
+    --font-mono: 'Press Start 2P', 'Courier New', Courier, monospace;
+    --bg-color: #000000;
+    /* Optional: Subtle Scanline Effect */
+    --bg-image: repeating-linear-gradient(
+        rgba(0, 255, 0, 0.08) 0px,
+        rgba(0, 255, 0, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    --bg-size: 100% 3px;
+    --bg-color-secondary: #0a0a0a;
+    --card-bg-color: #050505; /* Very dark grey, almost black */
+    --text-color: #00ff00; /* Bright Green */
+    --text-color-secondary: #00cc00; /* Slightly Darker Green */
+    --heading-color: #33ff33; /* Lighter Green */
+    --accent-color: #00ff00;
+    --accent-color-secondary: #33ff33;
+    --border-color: #008000; /* Dark Green */
+    --shadow-color: rgba(0, 255, 0, 0.3);
+    --link-color: var(--heading-color);
+    --link-hover-color: #ffffff; /* White on hover */
+    --button-bg: var(--accent-color);
+    --button-text: #000000;
+    --button-hover-bg: var(--heading-color);
+    --header-line-gradient: linear-gradient(to right, var(--accent-color), var(--heading-color));
+    --victor-link-color: #00cc00;
+    --border-radius-sm: 0px; /* Sharp corners */
+    --border-radius-md: 0px;
+    --shadow-sm: none; /* No soft shadows */
+    --shadow-md: none;
+    text-shadow: 1px 1px 1px rgba(0, 255, 0, 0.2); /* Subtle green text glow */
+
+    .progress-percentage {
+        color: #000000; /* Black text */
+        /* Create a sharp white outline for contrast against green bar */
+        text-shadow:
+            1px 0px 0px #ffffff,
+           -1px 0px 0px #ffffff,
+            0px 1px 0px #ffffff,
+            0px -1px 0px #ffffff;
+    }
+
+    /* Reduce font size for chart elements in retro theme */
+    .chart-container canvas {
+        font-size: 0.75rem; /* Adjust as needed */
+    }
+    .subsection-title {
+        font-size: 1.1rem; /* Slightly smaller subsection title */
+    }
+
+    /* Retro-specific header size */
+    header h1 {
+        font-size: 2.0em;
+    }
+}
+
+
+/* Keyframes for Rainbow Background Scroll */
+@keyframes rainbow-bg-scroll {
+    0% { background-position: 0% 50%; }
+    100% { background-position: -100% 50%; } /* Scroll left */
+}
+
+/* 7. Forest Theme (Green/Turquoise/Black) */
+[data-theme="forest"] {
+    --font-primary: 'Merriweather', serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --bg-color: #0f1a0f;
+    /* Herringbone Pattern */
+    --bg-image: repeating-linear-gradient(135deg, rgba(46, 139, 87, 0.1), rgba(46, 139, 87, 0.1) 10px, transparent 10px, transparent 20px), repeating-linear-gradient(45deg, rgba(46, 139, 87, 0.1), rgba(46, 139, 87, 0.1) 10px, transparent 10px, transparent 20px);
+    --bg-size: 28px 28px; /* Adjusted size for herringbone */
+    --bg-color-secondary: #1a2a1a;
+    --card-bg-color: #223d22;
+    --text-color: #afeeee; /* Pale Turquoise */
+    --text-color-secondary: #7fffd4; /* Aquamarine */
+    --heading-color: #ffffff;
+    --accent-color: #40e0d0; /* Turquoise */
+    --accent-color-secondary: #00fa9a; /* Medium Spring Green */
+    --border-color: #2e8b57; /* Sea Green */
+    --shadow-color: rgba(0, 50, 0, 0.6);
+    --link-color: var(--accent-color);
+    --link-hover-color: #7fffd4;
+    --button-bg: var(--accent-color);
+    --button-text: #0f1a0f;
+    --button-hover-bg: var(--link-hover-color);
+    --header-line-gradient: linear-gradient(to right, var(--accent-color), var(--accent-color-secondary));
+    --victor-link-color: #7fffd4;
+
+    .progress-percentage {
+        color: #0f1a0f; /* Dark green text */
+        /* Create a sharp light outline */
+        text-shadow:
+            1px 0px 0px rgba(255, 255, 255, 0.7),
+           -1px 0px 0px rgba(255, 255, 255, 0.7),
+            0px 1px 0px rgba(255, 255, 255, 0.7),
+            0px -1px 0px rgba(255, 255, 255, 0.7);
+    }
+}
+
+
+/* --- Global Styles --- */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 25px;
+    background-color: var(--bg-color);
+    background-image: var(--bg-image, none); /* Apply background image/pattern */
+    background-size: var(--bg-size, auto); /* Control pattern size */
+    color: var(--text-color);
+    transition: background-color var(--transition-medium), color var(--transition-medium), background-image var(--transition-medium);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+/* --- Link Styles (Socials, Completions) --- */
+
+.social-link,
+.completion-link {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-weight: normal; /* Ensure it's not bold unless intended */
+    transition: color var(--transition-fast);
+    margin: 0 4px; /* Add some spacing */
+    display: inline-block; /* Prevent wrapping mid-link */
+}
+
+.social-link:hover,
+.completion-link:hover {
+    color: var(--accent-color-secondary);
+    text-decoration: underline; /* Add underline on hover for clarity */
+}
+
+/* Style for the [Video] link specifically */
+.completion-link {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* Container for social links */
+#profile-socials a {
+    margin-right: 8px; /* Add space between social links */
+}
+
+#profile-socials a:last-child {
+    margin-right: 0;
+}
+
+/* --- Header --- */
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+header h1 {
+    font-size: 4em;
+    margin-bottom: 15px;
+    color: var(--heading-color);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.theme-selector-container {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-selector-container label {
+    font-size: 0.9em;
+    color: var(--text-color-secondary);
+    font-weight: 600;
+}
+
+#theme-selector {
+    padding: 6px 10px;
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-primary);
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+#theme-selector:hover,
+#theme-selector:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+.main-nav {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color-secondary);
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.main-nav .nav-link {
+    position: relative; /* Needed for ::after positioning */
+    text-decoration: none;
+    color: var(--text-color-secondary);
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 5px 10px;
+    /* border-bottom: 2px solid transparent; Remove old border */
+    transition: color var(--transition-fast);
+}
+
+.main-nav .nav-link:hover {
+    color: var(--accent-color);
+}
+
+.main-nav .nav-link.active {
+    color: var(--accent-color);
+    /* border-bottom-color: var(--accent-color); Remove old border */
+}
+
+.main-nav .nav-link.active::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px; /* Underline thickness */
+    background: var(--header-line-gradient); /* Use the gradient */
+    position: absolute;
+    bottom: -12px; /* Adjust distance from text */
+    left: 0;
+    border-radius: 1.5px;
+}
+
+.header-line {
+    border: 0;
+    height: 4px;
+    background: var(--header-line-gradient);
+    width: 70%; /* Increased width */
+    /* max-width: 500px; Removed max-width */
+    margin: 20px auto 40px auto;
+    border-radius: var(--border-radius-sm);
+}
+
+/* --- Main Content & Layout --- */
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2em;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.section-line {
+    width: 150px;
+    height: 3px;
+    margin-bottom: 30px;
+}
+
+/* --- List View (index.html) --- */
+#solblist-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 25px; /* Increased space between items */
+    max-width: 900px; /* Keep container width */
+    margin: 0 auto; /* Center the container */
+}
+
+.list-item {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 15px; /* Add padding for internal spacing */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically in the center */
+    gap: 20px; /* Add gap between thumbnail and info */
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    width: 100%; /* Take full width of container */
+    /* margin: 25px auto; /* Removed margin, handled by container gap */
+    overflow: hidden;
+}
+
+.list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--shadow-color);
+    cursor: pointer;
+}
+
+.video-thumbnail-container {
+    width: 160px; /* Smaller fixed width */
+    height: 90px; /* Maintain 16:9 aspect ratio */
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0; /* Prevent thumbnail from shrinking */
+    /* Removed margin, handled by parent gap and padding */
+    border-radius: var(--border-radius-sm);
+}
+
+.video-thumbnail {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-medium);
+}
+
+.list-item:hover .video-thumbnail {
+    transform: scale(1.08);
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0; /* Remove padding, handled by parent */
+    min-width: 0; /* Prevent overflow */
+    flex-grow: 1; /* Allow info to take remaining space */
+}
+
+.info-container .level-name {
+    margin: 0 0 8px 0; /* Increased bottom margin */
+    font-size: 1.8em; /* Larger font size */
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--heading-color);
+    word-break: break-word;
+}
+
+.info-container .victors {
+    margin: 0;
+    font-size: 1.0em; /* Adjusted font size */
+    line-height: 1.5;
+    color: var(--text-color-secondary);
+    word-break: break-word;
+    font-style: italic;
+}
+
+.victor-profile-link {
+    color: var(--victor-link-color, var(--text-color)); /* Use specific var or fallback to text color */
+    text-decoration: none;
+    font-weight: 600; /* Slightly bolder */
+    transition: color var(--transition-fast);
+}
+
+.victor-profile-link:hover {
+    color: var(--link-hover-color, var(--accent-color)); /* Fallback to accent if hover not defined */
+    text-decoration: underline;
+}
+
+
+
+.victor-profile-link.first-victor::before {
+    content: "🏆"; /* Add a trophy icon before the name */
+    margin-right: 5px; /* Add some space after the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+.victor-profile-link.first-victor::after {
+    content: "🏆"; /* Add a trophy icon after the name */
+    margin-left: 5px; /* Add some space before the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+/* Style for first victor indication on profile page completions list */
+.completions-list li.first-victor-profile::before {
+    content: "🏆"; /* Trophy icon */
+    margin-right: 8px; /* Space between icon and text */
+    display: inline-block; /* Ensure proper spacing and alignment */
+    vertical-align: middle; /* Align icon nicely with text */
+}
+
+/* --- Profiles View (profiles.html) --- */
+
+/* --- Stats View (stats.html) --- */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background-color: var(--card-bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.stat-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: var(--text-color-secondary);
+    font-weight: 600;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+
+.error-message {
+    color: var(--accent-color); /* Use accent color for errors */
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 0, 0, 0.1); /* Subtle red background */
+    border: 1px solid var(--accent-color);
+    border-radius: var(--border-radius-sm);
+}
+
+#stats-content-container.stats-card {
+    /* Override default stat-card styles if needed for the main container */
+    /* Example: remove background if grid handles it */
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+
+/* --- Profiles View (profiles.html) --- */
+
+.rankings-layout-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Adjust ratio as needed */
+    gap: 40px;
+}
+
+.rankings-column,
+.stats-column {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.player-rankings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+footer a:hover,
+footer a:focus {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.player-rankings-list li {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-fast);
+}
+
+.player-rankings-list li:last-child {
+    border-bottom: none;
+}
+
+.player-rankings-list li:hover {
+    background-color: var(--bg-color-secondary);
+}
+
+.ranking-position {
+    font-weight: 700;
+    color: var(--accent-color);
+    min-width: 40px;
+    text-align: right;
+    margin-right: 15px;
+    font-size: 1.1em;
+}
+
+.player-name-link {
+    flex-grow: 1;
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: color var(--transition-fast);
+}
+
+.player-name-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+
+
+.victor-profile-link.first-victor::before {
+    content: "🏆"; /* Add a trophy icon before the name */
+    margin-right: 5px; /* Add some space after the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+.victor-profile-link.first-victor::after {
+    content: "🏆"; /* Add a trophy icon after the name */
+    margin-left: 5px; /* Add some space before the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+/* Style for first victor indication on profile page completions list */
+.completions-list li.first-victor-profile::before {
+    content: "🏆"; /* Trophy icon */
+    margin-right: 8px; /* Space between icon and text */
+    display: inline-block; /* Ensure proper spacing and alignment */
+    vertical-align: middle; /* Align icon nicely with text */
+}
+
+.player-points {
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    font-size: 1em;
+    font-family: var(--font-mono);
+}
+
+.stats-column h4 {
+    font-size: 1.3em;
+    color: var(--heading-color);
+    margin-bottom: 15px;
+}
+
+.stats-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.95em;
+}
+
+.stats-column li {
+    margin-bottom: 8px;
+    color: var(--text-color-secondary);
+}
+
+.stats-column li strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* --- Single Profile View (profile.html) --- */
+
+#single-profile-view {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.profile-card {
+    background-color: var(--card-bg-color);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    /* max-height and overflow-y removed from here */
+}
+
+/* Completions list styling (no scrollbar) */
+#profile-completions {
+    /* max-height and overflow-y removed to disable scrollbar */
+    margin-top: 15px; /* Example spacing */
+    /* padding-right removed as scrollbar is gone */
+}
+
+/* Increase height of the timeline chart container */
+#profile-timeline-chart-container {
+    min-height: 350px; /* Increased height */
+    margin-top: 20px; /* Add some space above the chart */
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 2.5em;
+    color: var(--heading-color);
+    margin: 0;
+}
+
+/* --- Stats View (stats.html) --- */
+
+.stats-card {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-top: 20px; /* Add some space above the card */
+}
+
+.stats-card p {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    color: var(--text-color-secondary);
+}
+
+.stats-card p strong {
+    color: var(--text-color);
+    font-weight: 600;
+    display: inline-block;
+    min-width: 200px; /* Align values */
+}
+
+.stats-card .error-message {
+    color: var(--accent-color); /* Use accent color for errors */
+    font-weight: bold;
+}
+
+/* --- Single Profile View (profile.html) --- */
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    text-align: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px;
+}
+
+.stat-item {
+    flex-basis: 150px; /* Give items a base width */
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9em;
+    color: var(--text-color-secondary);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+}
+
+/* New Progress Bar Styles */
+.stat-item.progress-stat {
+    flex-basis: 250px; /* Allow more space for the progress bar */
+    text-align: left; /* Align label left */
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 24px;
+    background-color: var(--bg-color-secondary);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    margin-top: 8px;
+    position: relative; /* For positioning the percentage text */
+    overflow: hidden; /* Ensure inner bar stays within bounds */
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--header-line-gradient); /* Use the gradient */
+    border-radius: var(--border-radius-sm);
+    transition: width var(--transition-medium);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Keep percentage text to the right if inside */
+}
+
+.progress-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--button-text); /* Use button text color for contrast on accent */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Improve readability */
+    font-family: var(--font-mono);
+}
+/* End New Progress Bar Styles */
+
+
+.completions-section h3 {
+    font-size: 1.6em;
+    color: var(--heading-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.completions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+footer a:hover,
+footer a:focus {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.completions-list li {
+    background-color: var(--bg-color-secondary);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-sm);
+    border-left: 4px solid var(--accent-color-secondary);
+    font-size: 1.05em;
+    transition: background-color var(--transition-fast);
+}
+
+.completions-list li:hover {
+    background-color: var(--card-bg-color); /* Slightly different hover */
+}
+
+.completion-video-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-left: 10px;
+    transition: color var(--transition-fast);
+}
+
+.completion-video-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+
+
+.victor-profile-link.first-victor::before {
+    content: "🏆"; /* Add a trophy icon before the name */
+    margin-right: 5px; /* Add some space after the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+.victor-profile-link.first-victor::after {
+    content: "🏆"; /* Add a trophy icon after the name */
+    margin-left: 5px; /* Add some space before the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+/* Style for first victor indication on profile page completions list */
+.completions-list li.first-victor-profile::before {
+    content: "🏆"; /* Trophy icon */
+    margin-right: 8px; /* Space between icon and text */
+    display: inline-block; /* Ensure proper spacing and alignment */
+    vertical-align: middle; /* Align icon nicely with text */
+}
+
+/* --- Buttons --- */
+
+.button-secondary {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    margin-bottom: 25px; /* Space below back button */
+}
+
+.button-secondary:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color); /* Contrast against accent */
+}
+
+/* --- Modal Styles --- */
+
+.modal-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Video takes 2/3, details take 1/3 */
+    gap: 25px;
+    align-items: center; /* Vertically center items */
+    width: 100%;
+}
+
+.modal-video-column {
+    /* Container for the video embed */
+    position: relative; /* Needed for aspect ratio padding trick */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.modal-video-column iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Remove default iframe border */
+}
+
+.modal-details-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Allow details column to fill height */
+    max-height: 70vh; /* Limit height to prevent excessive stretching */
+}
+
+#modal-level-title {
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    color: var(--heading-color);
+}
+
+.modal-points-display {
+    font-size: 1.1em;
+    color: var(--text-color-secondary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.modal-victors-heading {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.modal-victors-container {
+    flex-grow: 1; /* Allow this container to take remaining space */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    padding-right: 10px; /* Add padding for scrollbar */
+    margin-right: -10px; /* Offset padding to align content */
+    /* Custom scrollbar styling (optional, WebKit browsers) */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--accent-color) var(--card-bg-color); /* Firefox */
+}
+
+.modal-victors-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-victors-container::-webkit-scrollbar-track {
+    background: var(--card-bg-color);
+    border-radius: 3px;
+}
+
+.modal-victors-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 3px;
+}
+
+#modal-victors-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#modal-victors-list li {
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+#modal-victors-list li a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+#modal-victors-list li a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+
+
+.victor-profile-link.first-victor::before {
+    content: "🏆"; /* Add a trophy icon before the name */
+    margin-right: 5px; /* Add some space after the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+.victor-profile-link.first-victor::after {
+    content: "🏆"; /* Add a trophy icon after the name */
+    margin-left: 5px; /* Add some space before the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+/* Style for first victor indication on profile page completions list */
+.completions-list li.first-victor-profile::before {
+    content: "🏆"; /* Trophy icon */
+    margin-right: 8px; /* Space between icon and text */
+    display: inline-block; /* Ensure proper spacing and alignment */
+    vertical-align: middle; /* Align icon nicely with text */
+}
+
+/* Adjust original modal styles for new structure */
+.modal-overlay {
+    /* Existing styles */
+    align-items: center; /* Keep vertical centering */
+    justify-content: center; /* Keep horizontal centering */
+}
+
+.modal-content {
+    /* Existing styles */
+    max-width: 90vw; /* Limit width */
+    width: 800px; /* Set a specific width */
+    max-height: 85vh; /* Limit height */
+    display: flex; /* Use flex for internal layout */
+    flex-direction: column; /* Stack close button and grid */
+    padding: 25px; /* Adjust padding */
+}
+
+.modal-close-button {
+    /* Existing styles */
+    align-self: flex-end; /* Position close button to the top right */
+    margin-bottom: 15px; /* Add space below close button */
+}
+
+
+/* --- Original Modal Styles (Keep for reference/fallback) --- */
+/*
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--card-bg-color);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: scale(0.95);
+    transition: transform var(--transition-medium);
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.modal-close-button:hover {
+    color: var(--text-color);
+}
+
+.video-embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-bottom: 20px;
+}
+
+.video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#modal-victors-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#modal-victors-list li {
+    margin-bottom: 5px;
+}
+*/
+
+/* --- Profile Page Styles (profile.html) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-medium), visibility 0s var(--transition-medium);
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--transition-medium), visibility 0s;
+}
+
+.modal-content {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    position: relative;
+    max-width: 800px; /* Adjust as needed */
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform var(--transition-medium);
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    line-height: 1;
+}
+
+.modal-close-button:hover {
+    color: var(--accent-color-secondary);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--heading-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.modal-content h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: var(--heading-color);
+}
+
+#modal-victors-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0; /* Remove default bottom margin */
+}
+
+#modal-victors-list li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+#modal-victors-list a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+#modal-victors-list a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+
+
+.victor-profile-link.first-victor::before {
+    content: "🏆"; /* Add a trophy icon before the name */
+    margin-right: 5px; /* Add some space after the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+.victor-profile-link.first-victor::after {
+    content: "🏆"; /* Add a trophy icon after the name */
+    margin-left: 5px; /* Add some space before the icon */
+    display: inline-block; /* Ensure proper spacing */
+}
+
+/* Style for first victor indication on profile page completions list */
+.completions-list li.first-victor-profile::before {
+    content: "🏆"; /* Trophy icon */
+    margin-right: 8px; /* Space between icon and text */
+    display: inline-block; /* Ensure proper spacing and alignment */
+    vertical-align: middle; /* Align icon nicely with text */
+}
+
+/* Responsive Video Embed */
+.video-embed-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-bottom: 20px; /* Space below video */
+}
+
+.video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+/* --- Utility & Error --- */
+
+.error-message {
+    color: var(--accent-color-secondary);
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--accent-color-secondary);
+    padding: 15px;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* --- Responsive Design --- */
+
+/* --- About Section Specific Styles --- */
+.about-section {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    margin-top: 30px; /* Add space above the section */
+    border: 1px solid var(--border-color);
+}
+
+.about-section .section-title {
+    margin-bottom: 10px; /* Space between title and line */
+    color: var(--heading-color);
+}
+
+.about-section .section-line {
+    margin-bottom: 20px; /* Space between line and content */
+}
+
+.about-content p {
+    margin-bottom: 15px; /* Space between paragraphs */
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+.about-content strong {
+    color: var(--heading-color); /* Make strong text stand out slightly */
+    font-weight: 600;
+}
+
+.about-content code {
+    background-color: var(--bg-color-secondary);
+    color: var(--accent-color-secondary);
+    padding: 2px 5px;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 2.0em;
+    }
+
+    .theme-selector-container {
+        position: static; /* Move below title on small screens */
+        margin: 15px auto;
+        justify-content: center;
+    }
+
+    .main-nav {
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+    }
+
+    #solblist-container {
+        /* grid-template-columns: 1fr; */ /* Handled by auto-fit */
+        gap: 15px; /* Slightly reduce gap on mobile */
+        padding: 15px; /* Reduce padding on mobile */
+    }
+
+    .rankings-layout-container {
+        grid-template-columns: 1fr; /* Stack columns */
+        gap: 25px;
+    }
+
+    /* --- Stats View (stats.html) --- */
+
+.stats-card {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-top: 20px; /* Add some space above the card */
+}
+
+.stats-card p {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    color: var(--text-color-secondary);
+}
+
+.stats-card p strong {
+    color: var(--text-color);
+    font-weight: 600;
+    display: inline-block;
+    min-width: 200px; /* Align values */
+}
+
+.stats-card .error-message {
+    color: var(--accent-color); /* Use accent color for errors */
+    font-weight: bold;
+}
+
+/* --- Single Profile View (profile.html) --- */
+
+.profile-stats {
+        flex-direction: column; /* Stack stats vertically */
+        align-items: center; /* Center items */
+    }
+
+    .stat-item {
+        flex-basis: auto; /* Reset basis */
+        width: 80%; /* Give items width */
+        max-width: 300px;
+        text-align: center; /* Center text in stacked view */
+    }
+
+    .stat-item.progress-stat {
+         text-align: center; /* Center label */
+         width: 90%; /* Wider for progress bar */
+         max-width: 350px;
+    }
+
+    .profile-name {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6em;
+    }
+
+    .level-name {
+        font-size: 1.2em;
+    }
+
+    .profile-name {
+        font-size: 2em;
+    }
+
+    .stat-item {
+        flex-basis: 100%; /* One item per row */
+    }
+
+    .completions-list li {
+        font-size: 1em;
+    }
+}
+
+\n/* --- Profile Page Social Icons --- */
+.profile-socials-container {
+    display: flex;
+    gap: 15px; /* Space between icons */
+    margin-top: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.social-link {
+    display: inline-flex; /* Align icon nicely */
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color); /* Use theme color */
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-link:hover {
+    color: var(--link-hover-color); /* Use theme hover color */
+    transform: scale(1.1);
+}
+
+.social-icon {
+    width: 24px; /* Control icon size */
+    height: 24px;
+    fill: currentColor; /* Make SVG use the link's color */
+}
+
+/* Style for the completion date in profile lists */
+.completion-date {
+    font-size: 0.9em;
+    color: var(--text-color-secondary);
+    margin-left: 5px; /* Space before the date */
+    font-style: italic;
+}
+
+/* --- Player Comparison View (compare.html) --- */
+
+.comparison-container {
+    max-width: 900px; /* Adjust as needed */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.player-selection-area {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-selector label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+}
+
+.player-selector select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-width: 200px; /* Ensure dropdowns have decent width */
+    font-size: 1em;
+}
+
+.comparison-results-area {
+    margin-top: 20px;
+}
+
+.comparison-results-area p {
+    text-align: center;
+    color: var(--text-color-secondary);
+    font-style: italic;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Label, Player 1, Player 2 */
+    gap: 10px 20px; /* Row gap, Column gap */
+    align-items: start; /* Align items at the start of their cell */
+}
+
+.comparison-header {
+    font-weight: 700;
+    color: var(--heading-color);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+    text-align: center;
+}
+
+.comparison-header.player-name {
+    font-size: 1.1em;
+}
+
+.comparison-label {
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    text-align: right;
+    padding-right: 15px;
+}
+
+.comparison-value {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+}
+
+.comparison-value.unique-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left; /* Align list items left */
+    font-family: var(--font-sans);
+    font-size: 0.9em; /* Slightly smaller font for lists */
+}
+
+.comparison-value.unique-list li {
+    margin-bottom: 4px;
+    color: var(--text-color);
+}
+
+.info-message {
+    color: var(--accent-color); /* Or a specific info color */
+    font-weight: 600;
+}
+
+/* --- Comparison Page Specific Styles --- */
+
+.comparison-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Space between selection and results */
+    margin-top: 1.5rem;
+}
+
+.player-selection-area {
+    display: flex;
+    justify-content: space-around; /* Space out the selectors */
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.player-selector {
+    display: flex;
+    flex-direction: column; /* Stack label and select */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-selector label {
+    font-weight: 600;
+    color: var(--text-color-secondary);
+}
+
+.player-selector select {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-color-secondary);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    min-width: 180px; /* Ensure dropdowns have some width */
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+}
+
+.player-selector select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.comparison-results-area {
+    padding: 1.5rem;
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    min-height: 100px; /* Reduced min-height */
+    /* Let content define height, remove flex centering */
+}
+
+.comparison-results-area p {
+    color: var(--text-color-secondary);
+    font-style: italic;
+    text-align: center; /* Ensure placeholder text is centered */
+}
+
+.comparison-grid {
+    display: grid;
+    /* Label, Player 1, Player 2 */
+    grid-template-columns: auto minmax(120px, 1fr) minmax(120px, 1fr);
+    gap: 1rem 1.5rem; /* Row gap, Column gap */
+    align-items: start; /* Align items to the start of their cell */
+    width: 100%; /* Ensure grid takes full width */
+}
+
+.comparison-header {
+    font-weight: 700;
+    color: var(--heading-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    text-align: center;
+}
+
+.comparison-header.player-name {
+    font-size: 1.1em;
+}
+
+.comparison-label {
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    text-align: right;
+    padding-right: 1rem;
+    /* Vertically center label with its row */
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.comparison-value {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.1em;
+    /* Vertically center value */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0.25rem 0; /* Add some vertical padding */
+}
+
+/* Style for the common completions label spanning the grid */
+.comparison-label.common-completions-label {
+    grid-column: 1 / -1; /* Span all columns */
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-top: 1.5rem; /* Add space above */
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color-light);
+    color: var(--text-color);
+    height: auto; /* Override default height */
+    align-items: baseline; /* Align text to baseline */
+}
+
+/* Style for the common completions list container */
+.comparison-value.common-list {
+    grid-column: 1 / -1; /* Span all columns */
+    text-align: left; /* Align list items left */
+    font-family: var(--font-primary); /* Use primary font for lists */
+    font-size: 1em;
+    padding: 0.5rem 0; /* Padding top/bottom */
+    justify-content: flex-start; /* Align content to the start */
+    align-items: flex-start; /* Align items to the top */
+    height: auto; /* Override default height */
+}
+
+.comparison-value.common-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Take full width */
+    /* Allow the list to grow naturally, no fixed height or scroll */
+    max-height: none;
+    overflow-y: visible;
+    display: grid;
+    /* Create columns for the list items */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem 1rem; /* Gap between list items */
+}
+
+.comparison-value.common-list li {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border-color-extra-light);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-color);
+    transition: background-color var(--transition-fast);
+}
+
+.comparison-value.common-list li:hover {
+    background-color: var(--bg-color-secondary);
+}
+
+.error-message {
+    color: #ff4d4d; /* Use a distinct error color */
+    font-weight: bold;
+}
+
+.info-message {
+    color: var(--accent-color); /* Use accent color for info */
+    font-weight: bold;
+}
+
+
+/* --- Changelog Page Specific Styles --- */
+
+.changelog-layout-container {
+    display: flex;
+    gap: 30px; /* Adjust gap between columns */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+#changelog-view,
+#list-changes-view {
+    flex: 1; /* Allow sections to grow and shrink */
+    min-width: 300px; /* Minimum width before wrapping */
+    /* Optional: Add some padding or margin if needed */
+    /* padding: 15px; */
+}
+
+/* Adjust section line width if needed within the flex container */
+.changelog-layout-container .section-line {
+    width: 100px; /* Make lines shorter */
+    margin-bottom: 20px;
+}
+
+.changelog-entry {
+    margin-bottom: 1.5rem; /* Space between entries */
+    padding: 1rem 1.5rem; /* Padding inside the card */
+    /* Inherits card styles like background, border-radius, shadow */
+}
+
+.changelog-version {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.changelog-date, .list-change-date-header {
+    font-size: 1.15em; /* Match .changelog-version */
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+    /* Uses text-secondary color defined elsewhere */
+    /* margin-left: 0.5rem; /* Space after version/before date */ /* Removed */
+}
+
+.list-change-date-header {
+    font-weight: 600; /* Make date header slightly bolder */
+    margin-bottom: 0.5rem;
+    margin-left: 0; /* Reset margin for the date header */
+    color: var(--heading-color); /* Match version header color */
+}
+
+.changelog-changes {
+    list-style: disc; /* Use standard bullet points */
+    padding-left: 25px; /* Indent list items */
+    margin-top: 0.5rem;
+    color: var(--text-color);
+}
+
+.changelog-changes li {
+    margin-bottom: 0.4rem; /* Space between list items */
+    line-height: 1.5;
+    font-size: 1em; /* Explicitly set base size */
+}
+
+/* Ensure List Changes items match */
+#list-changes-view ul {
+    list-style: disc;
+    padding-left: 25px;
+    margin-top: 0.5rem;
+    color: var(--text-color);
+}
+
+#list-changes-view li {
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+    font-size: 1em; /* Match changelog list items */
+}
+
+
+/* Style for the Challenge of the Month button on index.html */
+.challenge-link-section {
+    text-align: center; /* Ensure button is centered */
+    margin: 30px 0; /* Add more vertical space */
+}
+
+.challenge-button {
+    display: inline-block; /* Ensure padding and margins work correctly */
+    padding: 8px 16px; /* Reduced padding for smaller size */
+    font-size: 1em; /* Reduced font size */
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: var(--border-radius-md);
+    background-color: transparent; /* Outline style */
+    color: var(--accent-color); /* Text color matches border */
+    border: 2px solid var(--accent-color); /* Accent color border */
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+}
+
+.challenge-button:hover,
+.challenge-button:focus {
+    background-color: var(--accent-color); /* Fill on hover */
+    color: var(--button-text); /* Text color changes on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-color); /* Keep border color consistent */
+    outline: none; /* Remove default focus outline */
+}
+
+.challenge-separator {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    border-color: var(--border-color-light);
+}
+
+
+\n/* --- Profile Page Specific Styles --- */
+#profile-timeline-chart-container {
+    /* Keep margin, but let wrapper control size */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.chart-wrapper { /* Style the new wrapper */
+    position: relative;
+    height: 400px; /* Set the desired height here */
+    width: 100%;
+}
+
+#completionTimelineChart {
+    display: block;
+    box-sizing: border-box;
+    height: 100%; /* Fill the wrapper height */
+    width: 100%; /* Fill the wrapper width */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color-secondary);
+    font-size: 0.9em;
+    list-style: none;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+footer a:hover,
+footer a:focus {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.version-info {
+    margin-top: 10px; /* Add some space above the version */
+    font-style: italic;
+    opacity: 0.7;
+}
