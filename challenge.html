@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,15 @@
     <link rel="stylesheet" href="style.css"> <!-- Main styles -->
     <link rel="stylesheet" href="challenge.css"> <!-- Challenge-specific styles -->
     <link rel="icon" href="favicon.png" type="image/png">
+    <script>
+        // Apply theme immediately to prevent flash
+        (function () {
+            var savedTheme = localStorage.getItem('solblist-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
+
 <body>
     <header>
         <h1>THE SOLBLIST™</h1>
@@ -55,4 +64,5 @@
     <script src="common.js"></script>
     <script src="challenge.js"></script> <!-- Challenge-specific script -->
 </body>
+
 </html>

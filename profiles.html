@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.png" type="image/png">
+    <script>
+        // Apply theme immediately to prevent flash
+        (function () {
+            var savedTheme = localStorage.getItem('solblist-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
+
 <body>
     <header>
         <h1>THE SOLBLIST™</h1>
@@ -43,12 +52,12 @@
             </div>
             <!-- Right Column: Additional Content (e.g., Stats) -->
             <div class="stats-column">
-                 <h2 class="section-title">List Stats</h2>
-                 <hr class="header-line section-line">
-                 <div id="list-stats-container">
-                     <!-- Stats content will go here -->
-                     <p>Loading stats...</p>
-                 </div>
+                <h2 class="section-title">List Stats</h2>
+                <hr class="header-line section-line">
+                <div id="list-stats-container">
+                    <!-- Stats content will go here -->
+                    <p>Loading stats...</p>
+                </div>
             </div>
         </div>
 
@@ -60,7 +69,8 @@
     </footer>
 
     <!-- Include common script first, then page-specific script -->
-    <script src="common.js"></script> 
+    <script src="common.js"></script>
     <script src="profiles.js"></script>
 </body>
+
 </html>

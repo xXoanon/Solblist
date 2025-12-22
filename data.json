@@ -32,6 +32,19 @@
     },
     {
         "rank": 3,
+        "name": "Hyper Paradox",
+        "levelId": "61531210",
+        "victors": [
+            {
+                "name": "Lapiz",
+                "completionUrl": "https://www.youtube.com/watch?v=c9sWfw5leE8",
+                "completionDate": "2025-12-11"
+            }
+        ],
+        "videoUrl": "https://www.youtube.com/watch?v=Hlb2E2EKfMA"
+    },
+    {
+        "rank": 4,
         "name": "Blade of Justice",
         "levelId": "35448603",
         "victors": [
@@ -44,7 +57,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=6018CbEjA-4"
     },
     {
-        "rank": 4,
+        "rank": 5,
         "name": "Bloodbath",
         "levelId": "10565740",
         "victors": [
@@ -62,7 +75,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=A6xe4tKdx_c"
     },
     {
-        "rank": 5,
+        "rank": 7,
         "name": "moment",
         "levelId": "68848817",
         "victors": [
@@ -103,7 +116,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=Ba4PkcqiZa4"
     },
     {
-        "rank": 7,
+        "rank": 8,
         "name": "DIRT",
         "levelId": "95463838",
         "victors": [
@@ -116,7 +129,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=fWHLNhMltFg"
     },
     {
-        "rank": 8,
+        "rank": 9,
         "name": "Down Bass",
         "levelId": "8147005",
         "victors": [
@@ -129,7 +142,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=gyRjfhKYQeU"
     },
     {
-        "rank": 9,
+        "rank": 10,
         "name": "aftermath",
         "levelId": "25610878",
         "victors": [
@@ -142,7 +155,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=yBpvgZ-4NAg"
     },
     {
-        "rank": 10,
+        "rank": 11,
         "name": "Overtime",
         "levelId": "83825373",
         "victors": [
@@ -155,7 +168,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=48SfAwLjaJU"
     },
     {
-        "rank": 11,
+        "rank": 12,
         "name": "Cupid",
         "levelId": "95757926",
         "victors": [
@@ -168,7 +181,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=6HKERcnzQsU"
     },
     {
-        "rank": 12,
+        "rank": 13,
         "name": "Broken Signal",
         "levelId": "69108628",
         "victors": [
@@ -181,7 +194,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=hE4unVwBeD8"
     },
     {
-        "rank": 13,
+        "rank": 14,
         "name": "Napalm",
         "levelId": "65561437",
         "victors": [
@@ -194,7 +207,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=29NTgRXWuMc"
     },
     {
-        "rank": 14,
+        "rank": 15,
         "name": "TROLLMACHINE",
         "levelId": "84325817",
         "victors": [
@@ -207,7 +220,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=VSw1c3L8szo"
     },
     {
-        "rank": 15,
+        "rank": 16,
         "name": "Falling Up",
         "levelId": "24301797",
         "victors": [
@@ -219,8 +232,8 @@
         ],
         "videoUrl": "https://www.youtube.com/watch?v=gHHqPIvZXeM"
     },
-        {
-        "rank": 16,
+    {
+        "rank": 17,
         "name": "Crowd Control",
         "levelId": "69491632",
         "victors": [
@@ -237,8 +250,8 @@
         ],
         "videoUrl": "https://www.youtube.com/watch?v=-q0iBUZti9s"
     },
-            {
-        "rank": 17,
+    {
+        "rank": 18,
         "name": "Voided",
         "levelId": "82598548",
         "victors": [
@@ -251,7 +264,7 @@
         "videoUrl": "https://www.youtube.com/watch?v=1Tkzv0DEMSM"
     },
     {
-        "rank": 18,
+        "rank": 19,
         "name": "Allegiance",
         "levelId": "20761188",
         "victors": [
@@ -264,15 +277,14 @@
         "videoUrl": "https://www.youtube.com/watch?v=lHf6buYpbXU"
     },
     {
-        "rank": 19,
+        "rank": 20,
         "name": "Cataclysm",
         "levelId": "3979721",
-        "victors": [
-        ],
+        "victors": [],
         "videoUrl": "https://www.youtube.com/watch?v=vGV4j8C66JY"
     },
     {
-        "rank": 20,
+        "rank": 21,
         "name": "Azurite",
         "levelId": "62214792",
         "victors": [
@@ -300,11 +312,10 @@
         "videoUrl": "https://www.youtube.com/watch?v=yQRMhKruCPw"
     },
     {
-        "rank": 21,
+        "rank": 22,
         "name": "Acu",
         "levelId": "61079355",
-        "victors": [
-        ],
+        "victors": [],
         "videoUrl": "https://www.youtube.com/watch?v=z6l74Mkoxm8"
     }
 ]

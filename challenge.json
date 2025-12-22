@@ -1,24 +1,24 @@
 {
   "currentChallenge": {
-    "month": "May 2025",
-    "levelName": "(UPCOMING)",
-    "description": "",
+    "month": "Q4 2025",
+    "levelName": "pri demon th",
     "videoUrl": "",
     "creator": "Sky",
-    "difficulty": "?/10",
-    "id": "",
-    "victors": ["None"]
+    "id": "120357085",
+    "victors": [
+      "d050"
+    ]
   },
   "archive": [
     {
-      "month": "June 2023",
+      "month": "Q2 2023",
       "levelName": "Bloobidydoop",
-      "description": "Honestly way too difficult for what it is lmao",
       "videoUrl": "",
       "creator": "d050",
-       "difficulty": "10/10",
-       "id": "89770744",
-       "victors": ["Autumn"]
+      "id": "89770744",
+      "victors": [
+        "Autumn"
+      ]
     }
   ]
 }

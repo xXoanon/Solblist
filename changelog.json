@@ -38,6 +38,18 @@
         "I am inside your home.",
         "You left your door unlocked."
       ]
+    },
+    {
+      "version": "2.04",
+      "date": "2025-12-22",
+      "changes": [
+        "Changed Challenge of the Month to quarterly format (cuz no ones making challenges every month bro).",
+        "Simplified challenge display by removing difficulty and description fields.",
+        "Fixed theme flash when navigating between pages.",
+        "Updated challenge button to an info card showing more details.",
+        "Replaced trophy emojis with ★.",
+        "I'm going to break into your house and steal your money."
+      ]
     }
   ],
   "listChanges": [
@@ -56,11 +68,19 @@
         "Falling Up and Crowd Control have been swapped, with Falling up now above at #14."
       ]
     },
-        {
+    {
       "date": "2025-05-05",
       "changes": [
         "Solarion has been placed at #1, dethroning Black Blizzard that has reigned for 1494 days. This pushes Crowd Control into the legacy list.",
         "Voided added to the legacy list."
+      ]
+    },
+    {
+      "date": "2025-12-22",
+      "changes": [
+        "Hyper Paradox has been placed at #3, below Black Blizzard and above Blade of Justice. This pushes Falling Up into the legacy list.",
+        "gravity and moment have been swapped, with gravity now above at #6.",
+        "pri demon th added as the Q4 2025 challenge."
       ]
     }
   ]

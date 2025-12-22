@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (listContainer) {
         try {
             // Wait for the data to be loaded from common.js
-            await loadSolblistData(); 
+            await loadSolblistData();
             // Ensure getYouTubeId is also available
             if (typeof getYouTubeId !== 'undefined') {
                 populateList(listContainer);
@@ -22,7 +22,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
         console.warn('Could not find list container on index.html');
     }
+
+    // Load challenge preview
+    loadChallengePreview();
 });
+
+// Load challenge info for the preview card
+async function loadChallengePreview() {
+    const nameEl = document.getElementById('challenge-preview-name');
+    const metaEl = document.getElementById('challenge-preview-meta');
+
+    if (!nameEl || !metaEl) return;
+
+    try {
+        const response = await fetch('challenge.json');
+        if (!response.ok) throw new Error('Failed to load');
+        const data = await response.json();
+        const challenge = data.currentChallenge;
+
+        nameEl.textContent = challenge.levelName;
+        metaEl.textContent = `${challenge.month} • by ${challenge.creator}`;
+    } catch (error) {
+        nameEl.textContent = 'View Challenge';
+        metaEl.textContent = '';
+        console.warn('Could not load challenge preview:', error);
+    }
+}
 
 // --- Function for index.html --- 
 function populateList(container) {
@@ -139,7 +164,7 @@ function populateList(container) {
             if (legacyContainer) {
                 legacyContainer.appendChild(listItem); // Append legacy items to their container
             } else {
-                 console.error("Legacy container not found when trying to append item rank:", level.rank);
+                console.error("Legacy container not found when trying to append item rank:", level.rank);
             }
         }
     });

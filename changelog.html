@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.png" type="image/png">
+    <script>
+        // Apply theme immediately to prevent flash
+        (function () {
+            var savedTheme = localStorage.getItem('solblist-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
+
 <body>
     <header>
         <h1>THE SOLBLIST™</h1>
@@ -33,20 +42,20 @@
         <div class="changelog-layout-container"> <!-- Added container -->
             <section id="changelog-view">
                 <h2 class="section-title">Website Changelog</h2>
-            <hr class="header-line section-line">
-            <div id="changelog-container">
-                <p>Loading changelog...</p>
-                <!-- Changelog entries will be loaded here by changelog.js -->
-            </div>
-        </section>
+                <hr class="header-line section-line">
+                <div id="changelog-container">
+                    <p>Loading changelog...</p>
+                    <!-- Changelog entries will be loaded here by changelog.js -->
+                </div>
+            </section>
 
-        <section id="list-changes-view">
-            <h2 class="section-title">List Changelog</h2>
-            <hr class="header-line section-line">
-            <div id="list-changes-container">
-                <p>Loading list changes...</p>
-                <!-- List changes will be loaded here by changelog.js -->
-            </div>
+            <section id="list-changes-view">
+                <h2 class="section-title">List Changelog</h2>
+                <hr class="header-line section-line">
+                <div id="list-changes-container">
+                    <p>Loading list changes...</p>
+                    <!-- List changes will be loaded here by changelog.js -->
+                </div>
             </section>
         </div> <!-- Close container -->
     </main>
@@ -56,6 +65,7 @@
     </footer>
 
     <script src="common.js"></script>
-    <script src="changelog.js"></script> 
+    <script src="changelog.js"></script>
 </body>
+
 </html>

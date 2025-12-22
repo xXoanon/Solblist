@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.png" type="image/png">
+    <script>
+        // Apply theme immediately to prevent flash
+        (function () {
+            var savedTheme = localStorage.getItem('solblist-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
+
 <body>
     <header>
         <h1>THE SOLBLIST™</h1>
@@ -35,9 +44,14 @@
             <h2 class="section-title">About The Solblist</h2>
             <hr class="header-line section-line">
             <div class="about-content">
-                <p><strong>Welcome to The Solblist!</strong> This list ranks the hardest levels completed by members of Solbris, showcasing incredible skill and dedication.</p>
-                <p><strong>Ranking System:</strong> Levels are ranked based on the AREDL list, perceived difficulty, and community consensus from Solbris players. Completing harder levels earns players more points.</p>
-                <p><strong>List Points Calculation:</strong> List points are awarded using a formula that gives exponentially more points for harder levels. This system rewards players significantly for conquering the toughest challenges. The total possible amount of list points is <strong>150.</strong></p>
+                <p><strong>Welcome to The Solblist!</strong> This list ranks the hardest levels completed by members of
+                    Solbris, showcasing incredible skill and dedication.</p>
+                <p><strong>Ranking System:</strong> Levels are ranked based on the AREDL list, perceived difficulty, and
+                    community consensus from Solbris players. Completing harder levels earns players more points.</p>
+                <p><strong>List Points Calculation:</strong> List points are awarded using a formula that gives
+                    exponentially more points for harder levels. This system rewards players significantly for
+                    conquering the toughest challenges. The total possible amount of list points is
+                    <strong>150.</strong></p>
                 <p><sub>Website made by d050.</sub></p>
             </div>
         </section>
@@ -50,4 +64,5 @@
     <script src="common.js"></script>
     <!-- No specific JS needed for static about page yet -->
 </body>
+
 </html>

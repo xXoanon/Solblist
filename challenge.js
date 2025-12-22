@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         // Fetch challenge data (assuming a function in common.js or define here)
-        const challengeData = await loadChallengeData(); 
+        const challengeData = await loadChallengeData();
 
         // Ensure getYouTubeId is available if needed for video embeds
         if (typeof getYouTubeId === 'undefined') {
@@ -77,11 +77,10 @@ function populateCurrentChallenge(container, challenge) {
     }
 
     challengeItem.innerHTML = `
-        <h3>${challenge.month}: ${challenge.levelName}</h3>
+        <p class="challenge-quarter">${challenge.month}</p>
+        <h3>${challenge.levelName}</h3>
         <p><strong>Creator:</strong> ${challenge.creator || 'N/A'}</p>
-        <p><strong>Difficulty:</strong> ${challenge.difficulty || 'N/A'}</p>
         <p><strong>ID:</strong> ${challenge.id || 'N/A'}</p>
-        <p>${challenge.description || 'No description provided.'}</p>
         ${victorsHtml}
     `;
     container.appendChild(challengeItem);
@@ -120,8 +119,7 @@ function populateChallengeArchive(container, archive) {
 
         archiveItem.innerHTML = `
             <h4>${item.month}: ${item.levelName}</h4>
-            <p>Creator: ${item.creator || 'N/A'} | Difficulty: ${item.difficulty || 'N/A'} | ID: ${item.id || 'N/A'}</p>
-            ${item.description ? `<p class="archive-description">${item.description}</p>` : ''}
+            <p>Creator: ${item.creator || 'N/A'} | ID: ${item.id || 'N/A'}</p>
             ${archiveVictorsHtml}
         `;
         // Optionally add a link to view more details or the video if available
