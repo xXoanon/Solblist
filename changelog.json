@@ -50,6 +50,16 @@
         "Replaced trophy emojis with ★.",
         "I'm going to break into your house and steal your money."
       ]
+    },
+    {
+      "version": "2.05",
+      "date": "2025-12-27",
+      "changes": [
+        "Added new Christmas theme woohoo!!",
+        "Added AOS and CountUp.js libraries, so you can see more animations n shi throughout.",
+        "Reorganized theme selector into 'Standard Themes' and 'Holiday Themes' sections (imma do more with this later).",
+        "I'm watching you through your webcam right now."
+      ]
     }
   ],
   "listChanges": [

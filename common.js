@@ -6,43 +6,140 @@ const themeSelector = document.getElementById('theme-selector');
 const THEME_STORAGE_KEY = 'solblist-theme';
 
 // Define available themes (match data-theme values in CSS)
-const themes = {
+// Organized into categories for the dropdown
+const standardThemes = {
     'dark': 'Dark',
     'light': 'Light',
     'hell': 'Hell',
     'mechanical': 'Mechanical',
-    'pastel-dream': 'Pastel', /* Renamed from saturated */
+    'pastel-dream': 'Pastel',
     'rainbow': 'Rainbow',
     'forest': 'Forest',
-    'retro': 'Retro' // Added Retro theme
+    'retro': 'Retro'
 };
+
+const holidayThemes = {
+    'christmas': '🎄 Christmas'
+    // Future: 'halloween': '🎃 Halloween', etc.
+};
+
+// Combined themes object for validation
+const themes = { ...standardThemes, ...holidayThemes };
+
+// --- Christmas Click SFX ---
+const sleighSfxFiles = ['SFX/sleigh1.mp3', 'SFX/sleigh2.mp3', 'SFX/sleigh3.mp3', 'SFX/sleigh4.mp3'];
+
+function playChristmasClickSfx(event) {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'christmas') {
+        // Pick a random sleigh sound
+        const randomFile = sleighSfxFiles[Math.floor(Math.random() * sleighSfxFiles.length)];
+        const sfx = new Audio(randomFile);
+        sfx.volume = 0.3;
+        sfx.play().catch(() => { });
+
+        // If clicking a navigation link, delay the navigation so SFX can play
+        const link = event.target.closest('a[href]');
+        if (link && !link.href.startsWith('javascript:') && !link.target) {
+            event.preventDefault();
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 750); // 0.75 second delay for SFX to play
+        }
+    }
+}
+
+// Add global click listener for Christmas SFX
+document.addEventListener('click', playChristmasClickSfx);
+
+// --- tsParticles Snow Configuration ---
+const snowConfig = {
+    particles: {
+        number: { value: 100, density: { enable: true, area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: { min: 0.3, max: 0.8 } },
+        size: { value: { min: 1, max: 5 } },
+        move: {
+            enable: true,
+            speed: { min: 1, max: 3 },
+            direction: "bottom",
+            straight: false,
+            outModes: { default: "out", top: "none" }
+        },
+        wobble: { enable: true, distance: 10, speed: 5 }
+    },
+    interactivity: { events: { onClick: { enable: false }, onHover: { enable: false } } },
+    detectRetina: true,
+    fullScreen: { enable: true, zIndex: 0 }
+};
+
+let snowInstance = null;
+
+async function startSnow() {
+    if (typeof tsParticles !== 'undefined' && !snowInstance) {
+        snowInstance = await tsParticles.load("tsparticles", snowConfig);
+        console.log('Snow started');
+    }
+}
+
+function stopSnow() {
+    if (snowInstance) {
+        snowInstance.destroy();
+        snowInstance = null;
+        console.log('Snow stopped');
+    }
+}
 
 // Function to apply the selected theme
 function applyTheme(theme) {
     if (themes[theme]) {
         document.documentElement.setAttribute('data-theme', theme);
         console.log(`Theme applied: ${theme}`);
+
+        // Handle snow effect for Christmas theme
+        if (theme === 'christmas') {
+            startSnow();
+        } else {
+            stopSnow();
+        }
     } else {
-        console.warn(`Invalid theme selected: ${theme}. Applying default (dark).`);
-        document.documentElement.setAttribute('data-theme', 'dark');
+        console.warn(`Invalid theme selected: ${theme}. Applying default (christmas).`);
+        document.documentElement.setAttribute('data-theme', 'christmas');
+        startSnow();
     }
 }
 
-// Function to populate the theme selector dropdown
+// Function to populate the theme selector dropdown with grouped options
 function populateThemeSelector() {
     if (!themeSelector) return;
 
-    Object.entries(themes).forEach(([value, text]) => {
+    // Create Standard Themes group
+    const standardGroup = document.createElement('optgroup');
+    standardGroup.label = 'Standard Themes';
+    Object.entries(standardThemes).forEach(([value, text]) => {
         const option = document.createElement('option');
         option.value = value;
         option.textContent = text;
-        themeSelector.appendChild(option);
+        standardGroup.appendChild(option);
     });
+    themeSelector.appendChild(standardGroup);
+
+    // Create Holiday Themes group
+    const holidayGroup = document.createElement('optgroup');
+    holidayGroup.label = 'Holiday Themes';
+    Object.entries(holidayThemes).forEach(([value, text]) => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = text;
+        holidayGroup.appendChild(option);
+    });
+    themeSelector.appendChild(holidayGroup);
 }
 
 // Function to load and apply the saved theme, and set dropdown
 function loadAndApplyInitialTheme() {
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'dark'; // Default to dark
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'christmas'; // Default to christmas
     applyTheme(savedTheme);
     if (themeSelector) {
         themeSelector.value = savedTheme; // Set dropdown to saved theme
@@ -127,7 +224,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load the footer content
-    loadFooter(); 
+    loadFooter();
+
+    // Initialize AOS (Animate On Scroll) if available
+    // Using offset -9999 to trigger all animations immediately on page load
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 600,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: -9999,  // Animate all elements immediately
+            delay: 0
+        });
+        console.log('AOS initialized.');
+    }
+});
+
+// Start snow after all scripts are loaded (including tsParticles)
+window.addEventListener('load', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'christmas' && typeof tsParticles !== 'undefined') {
+        startSnow();
+    }
 });
 
 // --- Data Loading --- 
@@ -166,7 +284,7 @@ async function loadSolblistData() {
 function getYouTubeId(url) {
     if (!url) return null;
     let ID = '';
-    url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
     if (url[2] !== undefined) {
         ID = url[2].split(/[^0-9a-z_\-]/i);
         ID = ID[0];
@@ -182,7 +300,7 @@ function getYouTubeId(url) {
     }
     // Ensure the extracted ID is valid
     if (typeof ID === 'string' && ID.length === 11) {
-         return ID;
+        return ID;
     }
     console.warn("Extracted YouTube ID is invalid:", ID, "from URL:", url);
     return null;

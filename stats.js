@@ -105,7 +105,7 @@ function populateStats(container) {
 
     // --- Calculate Statistics --- 
 
-    const firstVictorCounts = {}; 
+    const firstVictorCounts = {};
 
     const totalLevels = solblistData.length;
     let totalCompletions = 0;
@@ -160,28 +160,30 @@ function populateStats(container) {
     const topPlayerLabels = sortedVictors.map(([name]) => name);
     const topPlayerData = sortedVictors.map(([, count]) => count);
 
-    // --- Generate HTML --- 
+    // --- Generate HTML with CountUp.js targets --- 
+    const avgCompletions = totalLevels > 0 ? (totalCompletions / totalLevels) : 0;
+
     let statsHtml = `
         <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
                 <h4>Total Completions</h4>
-                <p>${totalCompletions}</p>
+                <p><span id="count-completions">0</span></p>
             </div>
-             <div class="stat-card">
+             <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
                 <h4>Total Points Awarded</h4>
-                <p>${totalPointsAwarded.toFixed(2)}</p>
+                <p><span id="count-points">0</span></p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
                 <h4>Most Active Player(s)</h4>
-                <p>${mostCommonVictors.join(', ')} (${maxCompletions} completions)</p>
+                <p>${mostCommonVictors.join(', ')} (<span id="count-max-completions">0</span> completions)</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
                  <h4>Average Completions per Level</h4>
-                 <p>${totalLevels > 0 ? (totalCompletions / totalLevels).toFixed(2) : 'N/A'}</p>
+                 <p><span id="count-avg">0</span></p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
                 <h4>Most Frequent First Victor</h4>
-                <p>${mostFrequentFirstVictors.length > 0 ? `${mostFrequentFirstVictors.join(', ')} (${maxFirstVictories} levels)` : 'N/A'}</p>
+                <p>${mostFrequentFirstVictors.length > 0 ? `${mostFrequentFirstVictors.join(', ')} (<span id="count-first-victories">0</span> levels)` : 'N/A'}</p>
             </div>
         </div>
         <hr class="header-line section-line">
@@ -192,6 +194,24 @@ function populateStats(container) {
     `;
 
     container.innerHTML = statsHtml;
+
+    // --- Initialize CountUp animations ---
+    if (typeof countUp !== 'undefined' && countUp.CountUp) {
+        const options = { duration: 2, useEasing: true, useGrouping: true };
+
+        new countUp.CountUp('count-completions', totalCompletions, options).start();
+        new countUp.CountUp('count-points', totalPointsAwarded, { ...options, decimalPlaces: 2 }).start();
+        new countUp.CountUp('count-max-completions', maxCompletions, options).start();
+        new countUp.CountUp('count-avg', avgCompletions, { ...options, decimalPlaces: 2 }).start();
+        if (maxFirstVictories > 0) {
+            new countUp.CountUp('count-first-victories', maxFirstVictories, options).start();
+        }
+    }
+
+    // Refresh AOS for dynamically added stat cards
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+    }
 
     // --- Create Chart --- 
     const ctx = document.getElementById('topPlayersChart')?.getContext('2d');
@@ -221,11 +241,11 @@ function populateStats(container) {
                     x: {
                         beginAtZero: true,
                         ticks: {
-                           stepSize: 1, // Ensure whole numbers for completions
-                           color: initialTextColor, // Use theme text color
-                           font: {
-                               family: initialFontMono // Use theme mono font
-                           }
+                            stepSize: 1, // Ensure whole numbers for completions
+                            color: initialTextColor, // Use theme text color
+                            font: {
+                                family: initialFontMono // Use theme mono font
+                            }
                         },
                         grid: {
                             color: initialBorderColor // Use theme border color
@@ -257,6 +277,6 @@ function populateStats(container) {
     } else {
         // Handle case with no victors
         const chartContainer = document.querySelector('.chart-container');
-        if(chartContainer) chartContainer.innerHTML = '<p>No completion data available for chart.</p>';
+        if (chartContainer) chartContainer.innerHTML = '<p>No completion data available for chart.</p>';
     }
 }

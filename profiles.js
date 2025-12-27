@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } else {
         console.warn('Could not find rankings or stats container on profiles.html');
-        if(rankingsContainer) rankingsContainer.innerHTML = '<p class="error-message">Error: Page structure is incorrect (missing stats container?).</p>';
-        if(statsContainer) statsContainer.innerHTML = '<p class="error-message">Error: Page structure is incorrect (missing rankings container?).</p>';
+        if (rankingsContainer) rankingsContainer.innerHTML = '<p class="error-message">Error: Page structure is incorrect (missing stats container?).</p>';
+        if (statsContainer) statsContainer.innerHTML = '<p class="error-message">Error: Page structure is incorrect (missing rankings container?).</p>';
     }
 });
 
@@ -65,6 +65,9 @@ function populateRankingsAndStats(rankingsContainer, statsContainer) {
     rankingsList.className = 'player-rankings-list';
     sortedPlayers.forEach((player, index) => {
         const rankItem = document.createElement('li');
+        // Add AOS animation attributes
+        rankItem.setAttribute('data-aos', 'fade-right');
+        rankItem.setAttribute('data-aos-delay', (index % 8) * 50); // Stagger animations
         rankItem.innerHTML = `
             <span class="ranking-position">${index + 1}.</span>
             <a href="profile.html?player=${encodeURIComponent(player.name)}" class="player-name-link">${player.name}</a>
@@ -83,6 +86,8 @@ function populateRankingsAndStats(rankingsContainer, statsContainer) {
     const easiestLevel = mainListLevels.find(l => l.rank === 15); // Easiest is #15
     const averagePointsPerLevel = totalLevels > 0 ? totalPossiblePoints / totalLevels : 0; // Avoid division by zero
 
+    // Add AOS animation to stats container
+    statsContainer.setAttribute('data-aos', 'fade-left');
     statsContainer.innerHTML = `
         <h4>Quick Stats</h4>
         <ul>
@@ -94,4 +99,9 @@ function populateRankingsAndStats(rankingsContainer, statsContainer) {
             <li>Average Points/Level: <strong>${averagePointsPerLevel.toFixed(2)} pts</strong></li>
         </ul>
     `;
+
+    // Refresh AOS to detect dynamically added elements
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+    }
 }

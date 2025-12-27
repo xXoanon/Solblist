@@ -109,6 +109,10 @@ function populateList(container) {
         listItem.className = level.rank > 15 ? 'list-item legacy-item' : 'list-item';
         listItem.dataset.rank = level.rank; // Store rank for potential use
 
+        // Add AOS animation attributes for scroll reveal effect
+        listItem.setAttribute('data-aos', 'fade-up');
+        listItem.setAttribute('data-aos-delay', ((level.rank - 1) % 5) * 50); // Stagger animations
+
         // Only append legacy items to the legacy container
         // if (level.rank <= 15) {
         //     container.appendChild(listItem); // Append main list items directly to the main container
@@ -196,6 +200,11 @@ function populateList(container) {
     } else {
         if (!toggleButton) console.error("Toggle button not found after list population.");
         if (!legacyListContent) console.error("Legacy list container not found after list population.");
+    }
+
+    // Refresh AOS to detect dynamically added elements
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
     }
 }
 
