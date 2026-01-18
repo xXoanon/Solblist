@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d050@solblist: ~</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --text-color: #e0e0e0;
+            --dim-text: #aaaaaa;
+
+            /* Linux (KDE Breeze Dark inspired) with Transparency */
+            --win-bg: rgba(49, 54, 59, 0.95);
+            --term-bg: rgba(0, 0, 0, 0.75);
+            --win-border: #616569;
+            --win-text: #eff0f1;
+            --btn-close-hover: #da4453;
+        }
+
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: var(--bg-color);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 1.79 4 4 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a1a1a' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: var(--text-color);
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        /* Generic Window Structure */
+        .window {
+            position: absolute;
+            background-color: var(--term-bg);
+            border: 1px solid var(--win-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 4px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .window.closing {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+
+        .window.active {
+            z-index: 999 !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border-color: #3daee9;
+        }
+
+        .title-bar {
+            background-color: var(--win-bg);
+            color: var(--win-text);
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-family: 'Segoe UI', Ubuntu, sans-serif;
+            user-select: none;
+            height: 28px;
+            cursor: default;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .window-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+            text-align: center;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .menu-bar {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 10px;
+            gap: 15px;
+            font-size: 11px;
+            font-family: sans-serif;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: default;
+        }
+
+        .menu-item {
+            opacity: 0.8;
+        }
+
+        .menu-item:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .win-btn {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #bdc3c7;
+            transition: all 0.2s;
+            border-radius: 50%;
+        }
+
+        .win-btn:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .win-btn.close:hover {
+            background-color: var(--btn-close-hover);
+        }
+
+        .icon-min::before {
+            content: "−";
+            font-weight: bold;
+            position: relative;
+            top: -1px;
+        }
+
+        .icon-max::before {
+            content: "□";
+            font-size: 9px;
+        }
+
+        .icon-close::before {
+            content: "✕";
+            font-size: 9px;
+        }
+
+
+        .term-body {
+            color: var(--dim-text);
+            padding: 8px;
+            font-size: 11px;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+            flex-grow: 1;
+            scrollbar-width: thin;
+            scrollbar-color: #555 transparent;
+        }
+
+        #main-window {
+            z-index: 1000;
+            width: 650px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 100px rgba(61, 174, 233, 0.2);
+            background-color: rgba(10, 10, 10, 0.95);
+        }
+
+        #main-window .term-body {
+            padding: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #timer {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .key-hint {
+            background: #333;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 3px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: bold;
+            border: 1px solid #555;
+            display: inline-block;
+            margin-top: 20px;
+            align-self: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .key-hint:hover {
+            background: #3daee9;
+            border-color: #3daee9;
+            color: #000;
+            box-shadow: 0 0 15px rgba(61, 174, 233, 0.5);
+        }
+
+        /* Removed dragging cursors */
+
+        /* --- ANIMATION / SEQUENCING STYLES --- */
+
+        #anim-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 99999;
+            display: none;
+            overflow: hidden;
+            font-family: 'VT323', monospace;
+        }
+
+        .phase-panic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        .panic-text {
+            color: #ef4444;
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .jumpscare-shake {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both infinite;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        .phase-boot {
+            padding: 20px;
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            display: none;
+        }
+
+        .phase-hack {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Fira Code', monospace;
+            color: #0f0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            #timer {
+                font-size: 1.5rem;
+            }
+
+            #main-window {
+                width: 95% !important;
+                left: 2.5% !important;
+                top: 10% !important;
+                transform: none !important;
+            }
+
+            .window:not(#main-window) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animation Overlay Container -->
+    <div id="anim-overlay">
+        <!-- Phase 1: Panic -->
+        <div id="panic-screen" class="phase-panic">
+            <div class="glitch" style="font-size: 4rem; color: white; font-weight: bold; margin-bottom: 20px;"
+                data-text="UPDATE FAILED">UPDATE FAILED</div>
+            <div class="panic-text">
+                KERNEL PANIC - NOT SYNCING: FATAL EXCEPTION 0x0000DEAD<br><br>
+                YOU DELETED SYSTEM32.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+                THERE IS NO ESCAPE.<br>
+            </div>
+        </div>
+
+        <!-- Phase 2: Boot -->
+        <div id="boot-screen" class="phase-boot"></div>
+
+        <!-- Phase 3: Hack/Final -->
+        <div id="hack-screen" class="phase-hack">
+            <div id="hack-output"></div>
+        </div>
+    </div>
+
+    <!-- Desktop -->
+    <div id="desktop-area"></div>
+
+    <script>
+        const desktop = document.getElementById('desktop-area');
+        // --- ANIMATION SEQUENCE LOGIC ---
+        const overlay = document.getElementById('anim-overlay');
+        const panicScreen = document.getElementById('panic-screen');
+        const bootScreen = document.getElementById('boot-screen');
+        const hackScreen = document.getElementById('hack-screen');
+        const hackOutput = document.getElementById('hack-output');
+        let zIndexCounter = 100;
+
+        function checkWindows() {
+            setTimeout(() => {
+                const count = document.querySelectorAll('.window').length;
+                if (count === 0) {
+                    startSequence();
+                }
+            }, 300);
+        }
+
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        // Helper to type text into an element
+        async function typeText(element, text, speed = 30) {
+            for (let char of text) {
+                element.innerHTML += char;
+                await sleep(speed);
+            }
+            element.innerHTML += "<br>";
+        }
+
+        async function waitForEnter() {
+            return new Promise(resolve => {
+                const handler = (e) => {
+                    if (e.key === 'Enter') {
+                        document.removeEventListener('keydown', handler);
+                        resolve();
+                    }
+                };
+                document.addEventListener('keydown', handler);
+            });
+        }
+
+        async function startSequence() {
+            // STEP 1: GLITCH / PANIC
+            overlay.style.display = 'block';
+            document.body.style.cursor = 'none';
+            panicScreen.classList.add('jumpscare-shake');
+
+            await sleep(4000);
+
+            // STEP 2: BLACKOUT / REBOOT
+            panicScreen.style.display = 'none';
+            await sleep(2000);
+
+            // STEP 3: BIOS POST
+            bootScreen.style.display = 'block';
+            await sleep(500);
+            bootScreen.innerHTML = "Solblist BIOS (c) 2026<br>Version 3?.X.X<br><br>";
+            await sleep(500);
+            bootScreen.innerHTML += "CPU: Quantum Core x64 @ 8.0GHz<br>";
+
+            // Memory Count
+            bootScreen.innerHTML += "Memory Test: ";
+            const memSpan = document.createElement('span');
+            bootScreen.appendChild(memSpan);
+            for (let i = 0; i <= 64000; i += 2048) {
+                memSpan.textContent = i + "KB OK";
+                await sleep(20);
+            }
+            await sleep(500);
+            bootScreen.innerHTML += "<br>NVRAM: CHECKING... <span style='color:#0f0'>OK</span><br>";
+            await sleep(500);
+            bootScreen.innerHTML += "Detecting Primary Master... SOLBLIST_ROOT (2TB)<br>";
+            await sleep(300);
+            bootScreen.innerHTML += "Detecting Primary Slave...  None<br><br>";
+            await sleep(800);
+            bootScreen.innerHTML += "Press <strong>ENTER</strong> to Boot Default Configuration...";
+
+            // Interactive Wait
+            await waitForEnter();
+
+            bootScreen.innerHTML += "<br><br>Booting...";
+            await sleep(1000);
+
+            // STEP 4: KERNEL LOAD
+            bootScreen.style.display = 'none';
+            hackScreen.style.display = 'block';
+            hackOutput.innerHTML = "";
+
+            const bootLogs = [
+                "[    0.000000] Linux version 6.8.0-solblist (root@buildhost)",
+                "[    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz root=UUID=dead-beef ro quiet",
+                "[    0.283102] Freeing unused kernel memory: 2048K",
+                "[    0.412033] Write protecting the kernel read-only data: 26624k",
+                "[    1.100230] Run /init as init process",
+                "[    1.500201] systemd[1]: Detected architecture x86-64.",
+                "[    2.102938] systemd[1]: Reached target Basic System."
+            ];
+
+            for (let log of bootLogs) {
+                hackOutput.innerHTML += log + "<br>";
+                await sleep(Math.random() * 200 + 50);
+            }
+            await sleep(1000);
+            hackOutput.innerHTML = ""; // Clear for login
+
+            // STEP 5: LOGIN
+            await typeText(hackOutput, "GNU/Linux 24.04 LTS (tty1)", 20);
+            hackOutput.innerHTML += "<br>d050-server login: ";
+
+            // Fake typing input interaction
+            await new Promise(resolve => {
+                let typed = "";
+                const handler = async (e) => {
+                    if (e.key === 'Enter') {
+                        document.removeEventListener('keydown', handler);
+                        hackOutput.innerHTML += "<br>";
+                        resolve();
+                    } else if (e.key.length === 1) {
+                        hackOutput.innerHTML += e.key;
+                    }
+                };
+                document.addEventListener('keydown', handler);
+            });
+
+            hackOutput.innerHTML += "Password: ";
+            // Fake password input (show stars)
+            await new Promise(resolve => {
+                const handler = async (e) => {
+                    if (e.key === 'Enter') {
+                        document.removeEventListener('keydown', handler);
+                        hackOutput.innerHTML += "<br>";
+                        resolve();
+                    } else if (e.key.length === 1) {
+                        hackOutput.innerHTML += "*";
+                    }
+                };
+                document.addEventListener('keydown', handler);
+            });
+
+            await sleep(800);
+            hackOutput.innerHTML += "<br>Welcome to Solblist CLI.<br><br>";
+            await sleep(1000);
+
+            // STEP 6: RESTORATION / HACK
+            await typeText(hackOutput, "Restoring user session...", 50);
+            await sleep(500);
+            hackOutput.innerHTML += "check_integrity...";
+            await sleep(1000);
+            hackOutput.innerHTML += " <span style='color:red'>FAILED</span><br>";
+            await sleep(500);
+            hackOutput.innerHTML += "<span style='color:red'>WARNING: UNKNOWN CONNECTION DETECTED</span><br>";
+            await sleep(500);
+
+            const hackLines = [
+                "> REMOTE OVERRIDE INITIATED",
+                "> DOWNLOADING PAYLOAD...",
+                "[||||||||||          ] 50%",
+                "[||||||||||||||||||||] 100%",
+                "> SYSTEM COMPROMISED",
+                "> THERE IS NO ESCAPE"
+            ];
+
+            for (let line of hackLines) {
+                const div = document.createElement('div');
+                div.style.color = 'red';
+                div.style.fontWeight = 'bold';
+                div.textContent = line;
+                hackOutput.appendChild(div);
+                await sleep(600);
+            }
+
+            await sleep(1500);
+
+            // STEP 7: COMPROMISED DESKTOP & DATA LEAK
+            overlay.style.display = 'none';
+            document.body.style.cursor = 'auto';
+
+            spawnMainWindow(true);
+
+            const leakFiles = [
+                "passwords.txt", "chrome_login_data.db", "id_scans.pdf", "tax_returns_2025.pdf",
+                "private_photos_backup.zip", "browser_history_full.json", "ssh_keys_root", "crypto_wallet.dat",
+                "whatsapp_backup.crypt12", "email_archive.pst", "webcam_recording.mp4"
+            ];
+
+            let chaosInterval = setInterval(() => {
+                const isLeak = Math.random() > 0.4; // 60% chance of leak message
+                if (isLeak) {
+                    const file = leakFiles[Math.floor(Math.random() * leakFiles.length)];
+                    spawnHackWindow(Math.floor(Math.random() * 1000), `UPLOADING: ${file}... ${Math.floor(Math.random() * 99)}%`);
+                } else {
+                    spawnHackWindow(Math.floor(Math.random() * 1000));
+                }
+            }, 30);
+
+            // Allow chaos to run for 6 seconds
+            await sleep(6000);
+
+            // STEP 8: THE CHOICE
+            clearInterval(chaosInterval);
+
+            // Clear ALL windows to focus attention and prevent accidental clicks
+            document.querySelectorAll('.window').forEach(w => {
+                w.remove();
+            });
+
+            const choiceResult = await showChoiceWindow();
+
+            if (choiceResult === 'Y') {
+                // SUCCESS SEQUENCE
+                const mainWin = document.getElementById('main-window');
+                if (mainWin) mainWin.remove();
+
+                await typeText(hackOutput, "<br>> EMERGENCY PROTOCOL INITIATED...", 20);
+                hackScreen.style.display = 'block'; // Use the overlay terminal again
+                overlay.style.display = 'block';
+                hackOutput.innerHTML = "";
+
+                hackOutput.style.color = '#0f0'; // Matrix Green
+                await typeText(hackOutput, "SCANNING FOR INTRUSION...", 10);
+                await sleep(500);
+                hackOutput.innerHTML += "THREAT DETECTED: TROJAN.WIN32.SOLBLIST<br>";
+                await sleep(500);
+                hackOutput.innerHTML += "DELETING... <span style='color:white'>[OK]</span><br>";
+                hackOutput.innerHTML += "PATCHING KERNEL... <span style='color:white'>[OK]</span><br>";
+                hackOutput.innerHTML += "RESTORING SYSTEM... <span style='color:white'>[OK]</span><br>";
+                await sleep(1000);
+                hackOutput.innerHTML += "<br><span style='font-size:1.5rem; font-weight:bold; color:white;'>SYSTEM SECURE. WELCOME BACK.</span>";
+                await sleep(2000);
+                window.location.href = 'list.html';
+
+            } else {
+                // FAILURE SEQUENCE
+                document.body.innerHTML = '';
+                document.body.style.backgroundColor = 'black';
+                const failMsg = document.createElement('div');
+                failMsg.style.color = 'red';
+                failMsg.style.fontFamily = 'Courier New';
+                failMsg.style.position = 'absolute';
+                failMsg.style.top = '50%';
+                failMsg.style.left = '50%';
+                failMsg.style.transform = 'translate(-50%, -50%)';
+                failMsg.innerHTML = "SYSTEM PURGE FAILED.<br>DATA LOST.<br><br>PRESS F5 TO RECOVER.";
+                document.body.appendChild(failMsg);
+            }
+        }
+
+        function showChoiceWindow() {
+            return new Promise(resolve => {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                const width = 500;
+                const height = 250;
+
+                const winObj = createWindow(
+                    'choice-window',
+                    'CRITICAL WARNING',
+                    `<div style="font-size: 14px; text-align: center; color: red;">
+                        <br>
+                        <strong>UNAUTHORIZED DATA EXFILTRATION DETECTED.</strong><br><br>
+                        DO YOU WANT TO ACTIVATE THE EMERGENCY COUNTER-MEASURE PROTOCOL?<br><br>
+                        <div style="display:flex; justify-content:center; gap:20px; margin-top:20px;">
+                            <button id="btn-yes" style="background:red; color:white; border:none; padding:10px 20px; cursor:pointer; font-family:inherit; font-weight:bold;">[ Y ] YES - PURGE SYSTEM</button>
+                            <button id="btn-no" style="background:#333; color:#888; border:none; padding:10px 20px; cursor:pointer; font-family:inherit; font-weight:bold;">[ N ] NO - SHUTDOWN</button>
+                        </div>
+                    </div>`,
+                    'center', 'center', width, height
+                );
+
+                // Keep it on top
+                winObj.win.style.zIndex = 99999;
+                winObj.win.style.boxShadow = "0 0 50px red";
+                winObj.win.style.border = "2px solid red";
+
+                // Interaction Handlers
+                const btnYes = winObj.win.querySelector('#btn-yes');
+                const btnNo = winObj.win.querySelector('#btn-no');
+
+                let responded = false;
+
+                function respond(val) {
+                    if (responded) return;
+                    responded = true;
+                    // Remove listener
+                    document.removeEventListener('keydown', keyHandler);
+                    winObj.win.remove();
+                    resolve(val);
+                }
+
+                btnYes.onclick = () => respond('Y');
+                btnNo.onclick = () => respond('N');
+
+                const keyHandler = (e) => {
+                    if (e.key.toLowerCase() === 'y') respond('Y');
+                    if (e.key.toLowerCase() === 'n') respond('N');
+                };
+                document.addEventListener('keydown', keyHandler);
+            });
+        }
+
+        function spawnMainWindow(hacked = false) {
+            const title = hacked ? "d050@solblist: ~/ROOT_OVERRIDE" : "d050@solblist: ~/v3_launch_daemon";
+            const content = `
+                <div id="timer" style="${hacked ? 'color:red; text-shadow:0 0 10px red;' : ''}">LOADING...</div>
+                <a href="list.html" class="key-hint" style="${hacked ? 'border-color:red; color:red' : ''}">[ ENTER SYSTEM ]</a>
+                ${hacked ? '<div style="color:red; margin-top:20px; font-weight:bold; animation: blink 1s infinite;">SYSTEM COMPROMISED // SECURE CONNECTION LOST</div>' : ''}
+                <style>@keyframes blink { 50% { opacity: 0; } }</style>
+            `;
+            // Remove existing if any
+            const existing = document.getElementById('main-window');
+            if (existing) existing.remove();
+
+            createWindow('main-window', title, content, 'center', 'center', 650, 400, true);
+        }
+
+        function spawnHackWindow(i, customMsg = null) {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const width = 350 + Math.random() * 50;
+            const height = 120;
+            const x = Math.random() * (w - width);
+            const y = Math.random() * (h - height);
+
+            const msgs = [
+                "YOUR DATA IS MINE", "SYSTEM32 DELETED", "TRY REFRESHING",
+                "NO ESCAPE", "ERROR 0xDEAD", "WATCHING YOU", "CONNECTING..."
+            ];
+            const msg = customMsg || msgs[Math.floor(Math.random() * msgs.length)];
+
+            const winObj = createWindow(
+                `hack-win-${i}-${Date.now()}`,
+                `WARNING: SECURITY ALERT`,
+                `<div style="color:red; font-size:1rem; font-weight:bold; text-align:center; padding-top:20px;">> ${msg}</div>`,
+                x, y, width, height
+            );
+            winObj.win.style.borderColor = 'red';
+            winObj.win.style.boxShadow = '0 0 20px red';
+            winObj.win.style.zIndex = 2000 + i;
+        }
+
+        function closeWindow(windowEl) {
+            windowEl.classList.add('closing');
+            setTimeout(() => {
+                windowEl.remove();
+                checkWindows();
+            }, 200);
+        }
+
+        function createWindow(id, title, contentHtml, x, y, width, height, isMain = false) {
+            const win = document.createElement('div');
+            win.id = id;
+            win.className = 'window';
+            if (isMain) win.classList.add('active');
+
+            if (x === 'center') {
+                win.style.left = '50%';
+                win.style.top = '50%';
+                win.style.transform = 'translate(-50%, -50%)';
+            } else {
+                win.style.left = x + 'px';
+                win.style.top = y + 'px';
+            }
+            // NO TRANSFORMS
+
+            win.style.width = width + 'px';
+            win.style.height = height + 'px';
+
+            // On click bring to front (since no more dragging)
+            win.addEventListener('mousedown', () => {
+                win.style.zIndex = ++zIndexCounter;
+                document.querySelectorAll('.window').forEach(w => {
+                    w.classList.remove('active');
+                });
+                win.classList.add('active');
+            });
+
+            const titleBar = document.createElement('div');
+            titleBar.className = 'title-bar';
+
+            const menuBar = document.createElement('div');
+            menuBar.className = 'menu-bar';
+            menuBar.innerHTML = `<span class="menu-item">File</span><span class="menu-item">Edit</span><span class="menu-item">View</span><span class="menu-item">Help</span>`;
+
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'window-title';
+            titleSpan.textContent = title;
+
+            const controls = document.createElement('div');
+            controls.className = 'window-controls';
+
+            // Buttons
+            const btnMin = document.createElement('div'); btnMin.className = 'win-btn win-min';
+            btnMin.innerHTML = '<span class="icon-min"></span>';
+            const btnMax = document.createElement('div'); btnMax.className = 'win-btn win-max';
+            btnMax.innerHTML = '<span class="icon-max"></span>';
+            const btnClose = document.createElement('div'); btnClose.className = 'win-btn win-close close';
+            btnClose.innerHTML = '<span class="icon-close"></span>';
+
+            btnClose.onclick = function (e) {
+                e.stopPropagation();
+                closeWindow(win);
+            };
+
+            controls.appendChild(btnMin);
+            controls.appendChild(btnMax);
+            controls.appendChild(btnClose);
+
+            titleBar.appendChild(titleSpan);
+            titleBar.appendChild(controls);
+
+            const body = document.createElement('div');
+            body.className = 'term-body';
+            body.innerHTML = contentHtml;
+
+            win.appendChild(titleBar);
+            if (!isMain) win.appendChild(menuBar);
+            win.appendChild(body);
+            desktop.appendChild(win);
+
+            return { win, body };
+        }
+
+        // --- INIT MAIN WINDOW ---
+        spawnMainWindow();
+
+        // --- BACKGROUND WINDOWS & GENERATORS ---
+        const gens = {
+            build: () => {
+                const files = ['utils.o', 'main.o', 'network.o', 'graphics.o', 'audio.o', 'physics.o'];
+                return () => `[${new Date().toLocaleTimeString()}] gcc -c ${files[Math.floor(Math.random() * files.length)]} -O3 -Wall<br>
+                              warning: implicit declaration of function 'hack_mainframe'<br>
+                              ${Math.random() > 0.8 ? "linking objects... done" : "compiling..."}`;
+            },
+            server: () => {
+                const ips = () => `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+                const methods = ['GET', 'POST', 'PUT'];
+                const paths = ['/api/user', '/login', '/assets/style.css', '/v3/status', '/admin/panel'];
+                return () => `${ips()} - - [${new Date().toISOString()}] "${methods[Math.floor(Math.random() * methods.length)]} ${paths[Math.floor(Math.random() * paths.length)]} HTTP/2.0" 200 ${Math.floor(Math.random() * 5000)}B`;
+            },
+            system: () => {
+                const procs = ['systemd', 'kworker', 'Xorg', 'chrome', 'node', 'python3', 'docker'];
+                return () => `PID ${Math.floor(Math.random() * 30000)} (${procs[Math.floor(Math.random() * procs.length)]}): ${Math.floor(Math.random() * 20)}% CPU, ${Math.floor(Math.random() * 50000)}K MEM - running`;
+            },
+            chat: () => {
+                const users = ['neo', 'morpheus', 'trinity', 'root', 'admin', 'guest'];
+                const msgs = ['system is unstable', 'did you patch the kernel?', 'deploying v3 soon', 'check the logs', 'who is d050?', 'packet loss detected'];
+                return () => `<span style="color:cyan"><${users[Math.floor(Math.random() * users.length)]}></span> ${msgs[Math.floor(Math.random() * msgs.length)]}`;
+            },
+            scan: () => {
+                return () => `Scanning port ${Math.floor(Math.random() * 65535)}... ${Math.random() > 0.9 ? "<span style='color:lime'>OPEN</span>" : "closed"}`;
+            }
+        };
+
+        const types = [
+            { title: 'build_output.log', gen: gens.build },
+            { title: 'nginx_access.log', gen: gens.server },
+            { title: 'htop_dump', gen: gens.system },
+            { title: '#dev_channel', gen: gens.chat },
+            { title: 'nmap_scan_results', gen: gens.scan },
+            { title: 'kernel_debug', gen: gens.system }
+        ];
+
+        function spawnBackgroundTerminals() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+
+            // Create 10 windows
+            for (let i = 0; i < 10; i++) {
+                const width = 300 + Math.random() * 200;
+                const height = 200 + Math.random() * 200;
+                const x = 50 + Math.random() * (w - 100 - width);
+                const y = 50 + Math.random() * (h - 100 - height);
+                const type = types[Math.floor(Math.random() * types.length)];
+
+                const winObj = createWindow(
+                    `bg-win-${i}`,
+                    `d050@solblist: ${type.title}`,
+                    '', x, y, width, height
+                );
+
+                const generator = type.gen();
+                const maxLines = Math.floor(height / 16);
+                const lines = [];
+                for (let k = 0; k < 8; k++) lines.push(generator());
+                winObj.body.innerHTML = lines.join('<br>');
+
+                setInterval(() => {
+                    lines.push(generator());
+                    if (lines.length > maxLines) lines.shift();
+                    winObj.body.innerHTML = lines.join('<br>');
+                }, 500 + Math.random() * 1500);
+
+                winObj.win.style.zIndex = Math.floor(Math.random() * 50);
+            }
+        }
+
+        spawnBackgroundTerminals();
+
+        // --- TIMER ---
+        const targetDate = new Date("2026-01-18T06:00:00+03:00").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            const timerEl = document.getElementById("timer");
+            if (!timerEl) return;
+
+            if (distance < 0) {
+                timerEl.innerHTML = "00:00:00:00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const fDays = days.toString().padStart(2, '0');
+            const fHours = hours.toString().padStart(2, '0');
+            const fMinutes = minutes.toString().padStart(2, '0');
+            const fSeconds = seconds.toString().padStart(2, '0');
+
+            timerEl.innerText = `${fDays}d ${fHours}h ${fMinutes}m ${fSeconds}s`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        document.addEventListener('keydown', (e) => {
+            if (overlay.style.display === 'block') return;
+            if (e.key === 'Enter') {
+                window.location.href = 'list.html';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
